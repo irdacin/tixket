@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final String? hintText;
   final IconData? icon;
+  final Widget? trailing;
   final TextEditingController? controller;
-  final bool isVisible;
   final FormFieldValidator? validator;
+  final bool isVisible;
+  final bool isErrorText;
 
   const InputField({
     super.key,
     this.hintText,
     this.icon,
+    this.trailing,
     this.controller,
-    this.isVisible = true,
     this.validator,
+    this.isVisible = true,
+    this.isErrorText = false,
   });
 
   @override
@@ -21,6 +25,7 @@ class InputField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
@@ -56,8 +61,9 @@ class InputField extends StatelessWidget {
         ),
         filled: true,
         prefixIcon: Icon(icon),
+        suffixIcon: trailing
       ),
-      obscureText: !isVisible,
+      obscureText: isVisible,
     );
   }
 }
