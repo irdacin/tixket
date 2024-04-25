@@ -1,42 +1,68 @@
 import 'package:flutter/material.dart';
 
-class InputField extends StatelessWidget {
-  final String? hintText;
+class InputField extends StatefulWidget {
+  final String? labelText;
+  final FocusNode? focusNode;
   final IconData? icon;
   final Widget? trailing;
   final TextEditingController? controller;
   final FormFieldValidator? validator;
   final bool isVisible;
-  final bool isErrorText;
+  final String? errorText;
 
   const InputField({
     super.key,
-    this.hintText,
+    this.labelText,
+    this.focusNode,
     this.icon,
     this.trailing,
     this.controller,
     this.validator,
     this.isVisible = true,
-    this.isErrorText = false,
+    this.errorText,
   });
+
+  @override
+  State<InputField> createState() => _InputFieldState();
+}
+
+class _InputFieldState extends State<InputField> {
+  bool focusText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.focusNode?.addListener(() {
+      setState(() {
+        focusText = widget.focusNode!.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      validator: validator,
+      controller: widget.controller,
+      validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      focusNode: widget.focusNode,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Color(0xff383838),
+            color: Colors.grey,
             width: 1.5
           ),
           borderRadius: BorderRadius.circular(20),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Color(0xff383838),
+            // color: Color(0xff383838),
             width: 2
           ),
           borderRadius: BorderRadius.circular(20),
@@ -55,15 +81,22 @@ class InputField extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(20),
         ),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Colors.grey,
-        ),
+        labelText: widget.labelText,
+        labelStyle: 
+          focusText ? const TextStyle(
+            color:  Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          )
+          : const TextStyle(
+            color:  Colors.grey
+          ),
+        errorText: widget.errorText,
         filled: true,
-        prefixIcon: Icon(icon),
-        suffixIcon: trailing
+        prefixIcon: Icon(widget.icon),
+        suffixIcon: widget.trailing
       ),
-      obscureText: isVisible,
+      obscureText: !widget.isVisible,
     );
   }
 }

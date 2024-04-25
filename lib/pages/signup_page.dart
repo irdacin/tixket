@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
+import 'package:tixket/components/loading_button.dart';
 import 'package:tixket/pages/home_page.dart';
 import 'package:tixket/pages/login_page.dart';
 import 'package:tixket/provider/user_provider.dart';
@@ -17,9 +18,16 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  FocusNode focusNodeUsername = FocusNode();
+  FocusNode focusNodePassword = FocusNode();
+  FocusNode focusNodeConfirmPassword = FocusNode();
+
   final formKey = GlobalKey<FormState>();
+  
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
+  bool isErrorTextUsername = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +43,8 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 TextButton.icon(
                   onPressed: (){}, 
-                  icon: Icon(Icons.dark_mode),
-                  label: Text("Switch to Dark Mode")
+                  icon: const Icon(Icons.dark_mode),
+                  label: const Text("Switch to Dark Mode")
                 ),
                 const Text(
                   "Tixket",
@@ -48,16 +56,19 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 50),
                 InputField(
                   controller: usernameController,
-                  hintText: "Username",
+                  labelText: "Username",
+                  focusNode: focusNodeUsername,
                   icon: Icons.person,
-                  validator: (value) => Provider.of<UserProvider>(context).validator(value, "Username is required"),
+                  validator: (value) => UserProvider().validateUsername(value),
+                  errorText: isErrorTextUsername ? "Username already exists" : null,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 InputField(
                   controller: passwordController,
-                  hintText: "Password",
+                  labelText: "Password",
+                  focusNode: focusNodePassword,
                   icon: Icons.lock,
-                  isVisible: !isPasswordVisible,
+                  isVisible: isPasswordVisible,
                   trailing: IconButton(
                     onPressed: () {
                       setState(() {
@@ -66,14 +77,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     icon: Icon(isPasswordVisible ? Icons.visibility : Icons.visibility_off),
                   ),
-                  validator: (value) => Provider.of<UserProvider>(context).validator(value, "Password is required"),
+                  validator: (value) => UserProvider().validatePassword(value),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 InputField(
                   controller: confirmPasswordController,
-                  hintText: "Confirm Password",
+                  labelText: "Confirm Password",
+                  focusNode: focusNodeConfirmPassword,
                   icon: Icons.lock,
-                  isVisible: !isConfirmPasswordVisible,
+                  isVisible: isConfirmPasswordVisible,
                   trailing: IconButton(
                     onPressed: () {
                       setState(() {
@@ -82,11 +94,17 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     icon: Icon(isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off),
                   ),
-                  validator: (value) => Provider.of<UserProvider>(context).validator(value, "Confirm is required"),
+                  validator: (value) => UserProvider().validateConfirmPassword(value, passwordController.text),
                 ),
-                SizedBox(height: 80),
-                Text("Or Sign Up With"),
-                SizedBox(height: 50),
+                const SizedBox(height: 80),
+                const Text(
+                  "Or Sign Up With",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xff858484)
+                  ),
+                ),
+                const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -97,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 50,
                       ),
                     ),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     TextButton(
                       onPressed: (){}, 
                       child: Image.asset(
@@ -107,50 +125,55 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 50),
-                ElevatedButton(
-                  onPressed: (){
-                    if(passwordController.text != confirmPasswordController.text) {
-                      
+                const SizedBox(height: 50),
+                LoadingButton(
+                  label: "Sign Up",
+                  onPressed: () {
+                    if(UserProvider().validateUserSignUp(usernameController.text)) {
+                      setState(() {
+                        isErrorTextUsername = true;
+                      });
                       return;
+                    } else {
+                      setState(() {
+                        isErrorTextUsername = false;
+                      });
                     }
-                    if(formKey.currentState!.validate()){
+
+                    if(formKey.currentState!.validate()) {
                       User user = User(
                         username: usernameController.text,
                         password: passwordController.text
                       );
 
                       Provider.of<UserProvider>(context, listen: false).addUser(user);
-                      Provider.of<UserProvider>(context, listen: false).setUser(user);
-
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomePage())
+                        MaterialPageRoute(builder: (context) => const HomePage())
                       );
-                    } else {
-
                     }
-                    
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(MediaQuery.of(context).size.width, 0),
-                    foregroundColor: const Color.fromARGB(255, 36, 16, 16),
-                    backgroundColor: Colors.blue,
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                  ),
-                  child: Text("Sign Up"),
+                  }
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    Text("Already have an account?"),
+                    const Text(
+                      "Already have an account?",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xff858484)
+                      ),
+                    ),
                     TextButton(
-                      onPressed: (){
+                      onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => const LoginPage())
                         );
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors.blue
+                        foregroundColor: Colors.blue,
+                        textStyle: const TextStyle(
+                          fontSize: 16
+                        )
                       ),
                       child: const Text("Login"),
                     )
@@ -158,7 +181,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 )
               ],
             ),
-            
           ),
         ),
       ),
