@@ -23,10 +23,12 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            brightness: Brightness.light
+            brightness: Brightness.light,
+            fontFamily: 'Poppins'
           ),
           darkTheme: ThemeData(
-            brightness: Brightness.dark
+            brightness: Brightness.dark,
+            fontFamily: 'Poppins'
           ),
           themeMode: Provider.of<ThemeProvider>(context).isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home: const SignUpPage()
