@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
 import 'package:tixket/pages/home_page.dart';
 import 'package:tixket/pages/signup_page.dart';
+import 'package:tixket/provider/theme_provider.dart';
 import 'package:tixket/provider/user_provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -41,9 +41,17 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextButton.icon(
-                  onPressed: (){}, 
-                  icon: const Icon(Icons.dark_mode),
-                  label: const Text("Switch to Dark Mode")
+                  onPressed: (){
+                    Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                  }, 
+                  icon: Icon(
+                    Provider.of<ThemeProvider>(context).isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                  ),
+                  label: Text(
+                    "Switch to ${Provider.of<ThemeProvider>(context).isDarkMode ? 'Light Mode': 'Dark Mode'}",
+                    style: Theme.of(context).textTheme.bodyLarge
+                  )
                 ),
                 const Text(
                   "Tixket",

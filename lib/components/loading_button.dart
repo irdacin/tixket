@@ -46,8 +46,8 @@ class _LoadingButtonState extends State<LoadingButton> {
           ),
         )
         : Container(
-          width: 24,
-          height: 24,
+          width: 20,
+          height: 20,
           padding: const EdgeInsets.all(2),
           child: const CircularProgressIndicator(
             color: Colors.white,
