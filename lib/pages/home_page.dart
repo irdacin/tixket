@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/data/movie.dart';
-import 'package:tixket/provider/user_provider.dart';
+import 'package:tixket/providers/user_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

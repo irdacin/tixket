@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
 import 'package:tixket/data/user.dart';
-import 'package:tixket/pages/home_page.dart';
 import 'package:tixket/pages/login_page.dart';
-import 'package:tixket/provider/theme_provider.dart';
-import 'package:tixket/provider/user_provider.dart';
+import 'package:tixket/providers/theme_provider.dart';
+import 'package:tixket/providers/user_provider.dart';
+import 'package:tixket/utils/home.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -158,7 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       Provider.of<UserProvider>(context, listen: false).addUser(user);
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const HomePage())
+                        MaterialPageRoute(builder: (context) => const Home())
                       );
                     }
                   }
