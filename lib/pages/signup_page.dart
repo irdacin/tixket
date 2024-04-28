@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
+import 'package:tixket/data/user.dart';
 import 'package:tixket/pages/home_page.dart';
 import 'package:tixket/pages/login_page.dart';
 import 'package:tixket/provider/theme_provider.dart';

@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
-
-class User {
-  String username;
-  String password;
-
-  User({required this.username, required this.password});
-}
-
-List<User> users = [
-  User(
-    username: "mantacore",
-    password: "123456"
-  )
-];
+import 'package:tixket/data/user.dart';
 
 class UserProvider extends ChangeNotifier {
   User? _currentUser;

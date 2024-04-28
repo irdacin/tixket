@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tixket/pages/home_page.dart';
+import 'package:tixket/pages/login_page.dart';
 import 'package:tixket/pages/signup_page.dart';
 import 'package:tixket/provider/theme_provider.dart';
 import 'package:tixket/provider/user_provider.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Poppins'
           ),
           themeMode: Provider.of<ThemeProvider>(context).isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home: const SignUpPage()
+          home: const HomePage()
         );
       }
     );

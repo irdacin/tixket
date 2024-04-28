@@ -8,6 +8,7 @@ class InputField extends StatefulWidget {
   final TextEditingController? controller;
   final FormFieldValidator? validator;
   final bool isVisible;
+  final String? hintText;
   final String? errorText;
 
   const InputField({
@@ -19,6 +20,7 @@ class InputField extends StatefulWidget {
     this.controller,
     this.validator,
     this.isVisible = true,
+    this.hintText,
     this.errorText,
   });
 
@@ -87,10 +89,11 @@ class _InputFieldState extends State<InputField> {
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ) : null,
+        hintText: widget.hintText,
         errorText: widget.errorText,
-        filled: true,
         prefixIcon: Icon(widget.icon),
-        suffixIcon: widget.trailing
+        filled: true,
+        suffixIcon: widget.trailing,
       ),
       obscureText: !widget.isVisible,
     );
