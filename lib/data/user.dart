@@ -1,10 +1,12 @@
 class User {
   String username;
   String password;
+  String profilePicture;
 
   User({
     required this.username,
-    required this.password
+    required this.password,
+    this.profilePicture = "profile-picture.jpg"
   });
 }
 
