@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.asset(
-                          "assets/${movies[index].fileName}",
+                          "assets/images/${movies[index].fileName}",
                           fit: BoxFit.cover,
                           height: 500,
                         ),

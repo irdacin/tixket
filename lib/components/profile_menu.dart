@@ -5,6 +5,7 @@ class ProfileMenu extends StatelessWidget {
   final String title;
   final IconData icon; 
   final bool endIcon;
+  final Color? iconColor;
   final Color? textColor;
 
   const ProfileMenu({
@@ -13,6 +14,7 @@ class ProfileMenu extends StatelessWidget {
     required this.title,
     required this.icon,
     this.endIcon = true,
+    this.iconColor,
     this.textColor
   });
 
@@ -30,11 +32,11 @@ class ProfileMenu extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: Colors.blueAccent.withOpacity(0.1)
+                  color: iconColor!.withOpacity(0.1)
                 ),
                 child: Icon(
                   icon,
-                  color: Colors.blueAccent,
+                  color: iconColor!,
                 ),
               ),
               const SizedBox(width: 10),

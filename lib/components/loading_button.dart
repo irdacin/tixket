@@ -36,13 +36,14 @@ class _LoadingButtonState extends State<LoadingButton> {
         minimumSize: const Size(double.infinity, 0),
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
-        padding: const EdgeInsets.all(20)
+        padding: const EdgeInsets.all(20),
       ), 
       child: !isLoading 
         ? Text(
           widget.label,
           style: const TextStyle(
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
+            fontSize: 16
           ),
         )
         : Container(

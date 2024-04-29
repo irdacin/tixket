@@ -106,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   validator: (value) => UserProvider().validateConfirmPassword(value, passwordController.text),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 50),
                 const Text(
                   "Or Sign Up With",
                   style: TextStyle(
@@ -114,14 +114,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     color: Color(0xff858484)
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
                       onPressed: (){}, 
                       child: Image.asset(
-                        "assets/facebook.png",
+                        "assets/images/facebook.png",
                         height: 50,
                       ),
                     ),
@@ -129,7 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     TextButton(
                       onPressed: (){}, 
                       child: Image.asset(
-                        "assets/google.png",
+                        "assets/images/google.png",
                         height: 50,
                       ),
                     ),
@@ -163,7 +163,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     }
                   }
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Row(
                   children: [
                     const Text(

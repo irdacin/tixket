@@ -6,7 +6,7 @@ class User {
   User({
     required this.username,
     required this.password,
-    this.profilePicture = "profile-picture.jpg"
+    this.profilePicture = "profile-picture.png"
   });
 }
 

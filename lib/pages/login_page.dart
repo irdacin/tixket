@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 50),
                 const Text(
                   "Or Log in With",
                   style: TextStyle(
@@ -110,14 +110,14 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xff858484)
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
                       onPressed: (){}, 
                       child: Image.asset(
-                        "assets/facebook.png",
+                        "assets/images/facebook.png",
                         height: 50,
                       ),
                     ),
@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextButton(
                       onPressed: (){}, 
                       child: Image.asset(
-                        "assets/google.png",
+                        "assets/images/google.png",
                         height: 50,
                       ),
                     ),
@@ -159,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   }
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 Row(
                   children: [
                     const Text(

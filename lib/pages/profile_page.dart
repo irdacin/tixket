@@ -38,12 +38,14 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: 100,
-              height: 100,
+              width: 120,
+              height: 120,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                // child: Image.asset("assets/${Provider.of<UserProvider>(context).currentUser?.profilePicture}"),
-                child: Image.asset("assets/profile-picture.jpg"),
+                child: Image.asset(
+                  "assets/images/${Provider.of<UserProvider>(context).currentUser?.profilePicture}",
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -69,13 +71,15 @@ class _ProfilePageState extends State<ProfilePage> {
             ProfileMenu(
               onPress: (){}, 
               title: "Settings", 
-              icon: Icons.settings
+              icon: Icons.settings,
+              iconColor: Colors.blueAccent,
             ),
             const SizedBox(height: 5),
             ProfileMenu(
               onPress: (){}, 
               title: "History Booking", 
-              icon: Icons.history
+              icon: Icons.history,
+              iconColor: Colors.blueAccent,
             ),
             const SizedBox(height: 10),
             const Divider(),
@@ -88,8 +92,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               }, 
               title: "Log out", 
-              icon: Icons.logout,
               textColor: Colors.red,
+              icon: Icons.logout,
+              iconColor: Colors.redAccent,
               endIcon: false,
             )
           ],
