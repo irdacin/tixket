@@ -17,7 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile", style: Theme.of(context).textTheme.headlineMedium,),
+        title: Text("Profile", style: Theme.of(context).textTheme.headlineLarge,),
         centerTitle: true,
         actions: [
           IconButton(
@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 10),
             Text(
               Provider.of<UserProvider>(context).currentUser!.username,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -60,8 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
                 fixedSize: const Size(200, 40),
-                side: BorderSide.none,
-                shape: const StadiumBorder(),
+                textStyle: Theme.of(context).textTheme.bodyMedium
               ), 
               child: const Text("Edit Profile"),
             ),

@@ -107,27 +107,24 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: (value) => UserProvider().validateConfirmPassword(value, passwordController.text),
                 ),
                 const SizedBox(height: 50),
-                const Text(
+                Text(
                   "Or Sign Up With",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff858484)
-                  ),
+                  style: Theme.of(context).textTheme.displayMedium
                 ),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: (){}, 
+                    InkWell(
+                      onTap: (){}, 
                       child: Image.asset(
                         "assets/images/facebook.png",
                         height: 50,
                       ),
                     ),
-                    const SizedBox(width: 30),
-                    TextButton(
-                      onPressed: (){}, 
+                    const SizedBox(width: 50),
+                    InkWell(
+                      onTap: (){}, 
                       child: Image.asset(
                         "assets/images/google.png",
                         height: 50,
@@ -166,12 +163,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    const Text(
+                    Text(
                       "Already have an account?",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff858484)
-                      ),
+                      style: Theme.of(context).textTheme.displayMedium
                     ),
                     TextButton(
                       onPressed: () {
@@ -181,9 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.blue,
-                        textStyle: const TextStyle(
-                          fontSize: 16
-                        )
+                        textStyle: Theme.of(context).textTheme.bodyMedium
                       ),
                       child: const Text("Login"),
                     )

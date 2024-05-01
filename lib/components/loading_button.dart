@@ -37,18 +37,18 @@ class _LoadingButtonState extends State<LoadingButton> {
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         padding: const EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)
+        ),
+        textStyle: Theme.of(context).textTheme.bodyMedium
       ), 
       child: !isLoading 
         ? Text(
           widget.label,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16
-          ),
         )
         : Container(
-          width: 20,
-          height: 20,
+          width: 23,
+          height: 23,
           padding: const EdgeInsets.all(2),
           child: const CircularProgressIndicator(
             color: Colors.white,

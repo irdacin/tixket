@@ -93,37 +93,31 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: (){}, 
-                    child: const Text(
+                    child: Text(
                       "Forgot Password?",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff858484)
-                      ),
+                      style: Theme.of(context).textTheme.displayMedium
                     )
                   ),
                 ),
                 const SizedBox(height: 50),
-                const Text(
+                Text(
                   "Or Log in With",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff858484)
-                  ),
+                  style: Theme.of(context).textTheme.displayMedium
                 ),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: (){}, 
+                    InkWell(
+                      onTap: (){}, 
                       child: Image.asset(
                         "assets/images/facebook.png",
                         height: 50,
                       ),
                     ),
-                    const SizedBox(width: 30),
-                    TextButton(
-                      onPressed: (){}, 
+                    const SizedBox(width: 50),
+                    InkWell(
+                      onTap: (){}, 
                       child: Image.asset(
                         "assets/images/google.png",
                         height: 50,
@@ -162,12 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    const Text(
+                    Text(
                       "Don't have an account? ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xff858484)
-                      ),
+                      style: Theme.of(context).textTheme.displayMedium
                     ),
                     TextButton(
                       onPressed: () {
@@ -177,9 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.blue,
-                        textStyle: const TextStyle(
-                          fontSize: 16
-                        )
+                        textStyle: Theme.of(context).textTheme.bodyMedium
                       ),
                       child: const Text("Sign up"),
                     )

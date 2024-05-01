@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
           "Tixket",
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         actions: [
           IconButton(
@@ -32,27 +32,21 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Playing Now",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                    ),
+                    style: Theme.of(context).textTheme.headlineMedium
                   ),
                   Row(
                     children: [
                       Text(
                         "More Movies",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
+                        style: Theme.of(context).textTheme.headlineSmall
                       ),
-                      Icon(Icons.chevron_right)
+                      const Icon(Icons.chevron_right)
                     ],
                   )
                 ],
@@ -87,31 +81,28 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                           movies[index].title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium
                         ),
                         Row(
                           children: [
                             for(int i=0; i<5; i++) 
                               Icon(
                                 i < movies[index].star.toInt() ? Icons.star : i.toDouble() < movies[index].star ? Icons.star_half : Icons.star_border,
-                                color: Color(0xfff7d300),
+                                color: const Color(0xfff7d300),
                               ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text(
                               movies[index].star.toStringAsFixed(1),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xfff7d300)
                               ),
                             )
                           ],
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
 
                       ],
                     ),

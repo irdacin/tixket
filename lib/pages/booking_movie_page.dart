@@ -30,7 +30,7 @@ class BookingMoviePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(top: 40, left: 8, right: 8),
+                      padding: const EdgeInsets.only(top: 40, left: 8, right: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -38,7 +38,7 @@ class BookingMoviePage extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pop();
                             }, 
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back,
                               color: Colors.white,
                               size: 25,
@@ -48,7 +48,7 @@ class BookingMoviePage extends StatelessWidget {
                             children: [
                               IconButton(
                                 onPressed: (){},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.share_outlined,
                                   color: Colors.white,
                                   size: 25,
@@ -56,7 +56,7 @@ class BookingMoviePage extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: (){},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.favorite_outline,
                                   color: Colors.white,
                                   size: 25,
@@ -68,24 +68,20 @@ class BookingMoviePage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       child: Text(
                         movie.title,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium!.apply(color: Colors.white),
                       ),
                     )
                   ],
                 ),
               )
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: const Column(
                 children: [
                   
                 ],

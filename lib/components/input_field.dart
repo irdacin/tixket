@@ -57,28 +57,28 @@ class _InputFieldState extends State<InputField> {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).textTheme.bodyMedium!.color!,
+            color: Theme.of(context).colorScheme.primary,
             width: 1
           ),
           borderRadius: BorderRadius.circular(20),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).textTheme.bodyMedium!.color!,
+            color: Theme.of(context).colorScheme.primary,
             width: 2
           ),
           borderRadius: BorderRadius.circular(20),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
             width: 1.5
           ),
           borderRadius: BorderRadius.circular(20),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
             width: 2
           ),
           borderRadius: BorderRadius.circular(20),
@@ -93,6 +93,7 @@ class _InputFieldState extends State<InputField> {
         errorText: widget.errorText,
         prefixIcon: Icon(widget.icon),
         filled: true,
+        fillColor: Theme.of(context).colorScheme.onBackground,
         suffixIcon: widget.trailing,
       ),
       obscureText: !widget.isVisible,
