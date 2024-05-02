@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileMenu extends StatelessWidget {
-  final VoidCallback onPress;
+  final VoidCallback onPressed;
   final String title;
   final IconData icon; 
   final bool endIcon;
@@ -10,7 +10,7 @@ class ProfileMenu extends StatelessWidget {
 
   const ProfileMenu({
     super.key,
-    required this.onPress,
+    required this.onPressed,
     required this.title,
     required this.icon,
     this.endIcon = true,
@@ -21,7 +21,7 @@ class ProfileMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPress, 
+      onPressed: onPressed, 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

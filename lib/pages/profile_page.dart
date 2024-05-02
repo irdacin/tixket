@@ -68,14 +68,14 @@ class _ProfilePageState extends State<ProfilePage> {
             const Divider(),
             const SizedBox(height: 10),
             ProfileMenu(
-              onPress: (){}, 
+              onPressed: (){}, 
               title: "Settings", 
               icon: Icons.settings,
               iconColor: Colors.blueAccent,
             ),
             const SizedBox(height: 5),
             ProfileMenu(
-              onPress: (){}, 
+              onPressed: (){}, 
               title: "History Booking", 
               icon: Icons.history,
               iconColor: Colors.blueAccent,
@@ -84,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const Divider(),
             const SizedBox(height: 10),
             ProfileMenu(
-              onPress: (){
+              onPressed: (){
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => const LoginPage(),), 
                   (route) => false

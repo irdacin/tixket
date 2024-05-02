@@ -5,7 +5,7 @@ ThemeData lightTheme = ThemeData(
     primary: Colors.black,
     error: Colors.red,
     onError: Colors.red,
-    background: Colors.white,
+    background: Color(0xffdcdcde),
     onBackground: Color(0xffd9d9d9)
   ),
   useMaterial3: true,
@@ -34,6 +34,9 @@ ThemeData lightTheme = ThemeData(
     bodyMedium: TextStyle(
       fontSize: 16
     )
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: Colors.red
   )
 );
 

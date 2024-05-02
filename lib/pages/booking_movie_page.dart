@@ -81,9 +81,10 @@ class BookingMoviePage extends StatelessWidget {
             const SizedBox(height: 15),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Column(
+              child: Column(
                 children: [
-                  
+                  Text(movie.description),
+                  Icon(Icons.access_alarms)
                 ],
               ),
             )

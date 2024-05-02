@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/data/movie.dart';
 import 'package:tixket/pages/booking_movie_page.dart';
+import 'package:tixket/pages/search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +21,11 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: (){}, 
+            onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => SearchPage())
+              );
+            }, 
             icon: const Icon(
               Icons.search,
               size: 28,
@@ -53,13 +58,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(
-              height: 600,
+              height: 400,
               child: ListView.builder(
                 itemCount: movies.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Container(
+                    margin: const EdgeInsets.all(7),
                     padding: const EdgeInsets.all(7),
+                    color: Colors.green,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -76,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                               child: Image.asset(
                                 "assets/images/${movies[index].fileName}",
                                 fit: BoxFit.cover,
-                                height: 500,
+                                height: 300,
                               ),
                             ),
                           ),
@@ -84,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 10),
                         Text(
                           movies[index].title,
-                          style: Theme.of(context).textTheme.headlineMedium
+                          style: Theme.of(context).textTheme.headlineSmall
                         ),
                         Row(
                           children: [
@@ -103,13 +110,33 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         const SizedBox(height: 8),
-
                       ],
                     ),
                   );
                 },
               ),
-            )
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Coming soon",
+                    style: Theme.of(context).textTheme.headlineMedium
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "More Movies",
+                        style: Theme.of(context).textTheme.headlineSmall
+                      ),
+                      const Icon(Icons.chevron_right)
+                    ],
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
