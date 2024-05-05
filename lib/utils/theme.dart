@@ -5,73 +5,78 @@ ThemeData lightTheme = ThemeData(
     primary: Colors.black,
     error: Colors.red,
     onError: Colors.red,
-    background: Color(0xffdcdcde),
-    onBackground: Color(0xffd9d9d9)
+    background: Color(0xfff0f0f0),
+    onBackground: Color(0xffd9d9d9),
+    onPrimaryContainer: Colors.white,
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xfff0f0f0),
   ),
   useMaterial3: true,
   fontFamily: 'Poppins',
-  textTheme: const TextTheme(
-    labelMedium: TextStyle(
+  textTheme: TextTheme(
+    labelMedium: const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.bold
     ),
     displayMedium: TextStyle(
       fontSize: 16,
-      color: Color(0xff858484)
+      color: Colors.grey[600]
     ),
-    headlineLarge: TextStyle(
+    headlineLarge: const TextStyle(
       fontSize: 26,
       fontWeight: FontWeight.bold
     ),
-    headlineMedium: TextStyle(
+    headlineMedium: const TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w600
     ),
-    headlineSmall: TextStyle(
+    headlineSmall: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600
     ),
-    bodyMedium: TextStyle(
+    bodyMedium: const TextStyle(
       fontSize: 16
-    )
+    ),
   ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: Colors.red
-  )
 );
 
 ThemeData darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
     primary: Colors.white,
     background: Color(0xff121212),
-    onBackground: Color(0xff262626),
+    onBackground: Color(0xff242424),
     error: Colors.red,
     onError: Colors.red,
+    onPrimaryContainer: Colors.black
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xff121212)
   ),
   useMaterial3: true,
   fontFamily: 'Poppins',
-  textTheme: const TextTheme(
-    labelMedium: TextStyle(
+  textTheme: TextTheme(
+    labelMedium: const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.bold
     ),
     displayMedium: TextStyle(
       fontSize: 16,
-      color: Color(0xff858484)
+      color: Colors.grey[600]
     ),
-    headlineLarge: TextStyle(
+    headlineLarge: const TextStyle(
       fontSize: 26,
       fontWeight: FontWeight.bold
     ),
-    headlineMedium: TextStyle(
+    headlineMedium: const TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w600
     ),
-    headlineSmall: TextStyle(
+    headlineSmall: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600
     ),
-    bodyMedium: TextStyle(
+    bodyMedium: const TextStyle(
       fontSize: 16
     )
   ),

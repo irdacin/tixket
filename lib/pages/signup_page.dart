@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
           key: formKey,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(50),
+            padding: const EdgeInsets.all(35),
             margin: const EdgeInsets.only(top: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

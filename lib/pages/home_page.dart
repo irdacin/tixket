@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tixket/components/movie_card.dart';
 import 'package:tixket/data/movie.dart';
-import 'package:tixket/pages/booking_movie_page.dart';
 import 'package:tixket/pages/search_page.dart';
+import 'package:tixket/pages/view_all_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+  final List<Movie> playingNowMovies = movies.where((element) => element.type == "Playing Now").toList();
+  final List<Movie> comingSoonMovies = movies.where((element) => element.type == "Coming Soon").toList();
 
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,14 +44,21 @@ class _HomePageState extends State<HomePage> {
                     "Playing Now",
                     style: Theme.of(context).textTheme.headlineMedium
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "More Movies",
-                        style: Theme.of(context).textTheme.headlineSmall
-                      ),
-                      const Icon(Icons.chevron_right)
-                    ],
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ViewAllPage(movies: playingNowMovies, typeMovie: "Playing Now"),)
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View All",
+                          style: Theme.of(context).textTheme.headlineSmall
+                        ),
+                        const Icon(Icons.chevron_right)
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -60,81 +66,46 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 400,
               child: ListView.builder(
-                itemCount: movies.length,
+                itemCount: playingNowMovies.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.all(7),
-                    padding: const EdgeInsets.all(7),
-                    color: Colors.green,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => BookingMoviePage(movie: movies[index]))
-                            );
-                          },
-                          child: Hero(
-                            tag: movies[index].title,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                "assets/images/${movies[index].fileName}",
-                                fit: BoxFit.cover,
-                                height: 300,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          movies[index].title,
-                          style: Theme.of(context).textTheme.headlineSmall
-                        ),
-                        Row(
-                          children: [
-                            for(int i=0; i<5; i++) 
-                              Icon(
-                                i < movies[index].star.toInt() ? Icons.star : i.toDouble() < movies[index].star ? Icons.star_half : Icons.star_border,
-                                color: const Color(0xfff7d300),
-                              ),
-                            const SizedBox(width: 5),
-                            Text(
-                              movies[index].star.toStringAsFixed(1),
-                              style: const TextStyle(
-                                color: Color(0xfff7d300)
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
-                  );
-                },
+                itemBuilder: (context, index) => MovieCard(movie: playingNowMovies[index]),
               ),
             ),
+            const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Coming soon",
+                    "Coming Soon",
                     style: Theme.of(context).textTheme.headlineMedium
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "More Movies",
-                        style: Theme.of(context).textTheme.headlineSmall
-                      ),
-                      const Icon(Icons.chevron_right)
-                    ],
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ViewAllPage(movies: comingSoonMovies, typeMovie: "Coming Soon"))
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View All",
+                          style: Theme.of(context).textTheme.headlineSmall
+                        ),
+                        const Icon(Icons.chevron_right)
+                      ],
+                    ),
                   )
                 ],
+              ),
+            ),
+            SizedBox(
+              height: 400,
+              child: ListView.builder(
+                itemCount: comingSoonMovies.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => MovieCard(movie: comingSoonMovies[index]),
               ),
             ),
           ],

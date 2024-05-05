@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/data/movie.dart';
 
-class BookingMoviePage extends StatelessWidget {
+class MovieDetailPage extends StatelessWidget {
   final Movie movie;
-  const BookingMoviePage({super.key, required this.movie});
+
+  const MovieDetailPage({
+    super.key, 
+    required this.movie
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +87,7 @@ class BookingMoviePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  Text(movie.description),
-                  Icon(Icons.access_alarms)
+                  Text(movie.sinopsis),
                 ],
               ),
             )

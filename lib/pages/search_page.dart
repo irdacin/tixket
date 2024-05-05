@@ -83,7 +83,7 @@ class _SearchPageState extends State<SearchPage> {
                 height: 10,
               ),
               InputChip(label: Text("Godzilla: King of the Monster")),
-            ],
+            ],  
           )
         ],
       ),

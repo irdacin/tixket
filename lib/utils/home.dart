@@ -13,8 +13,8 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
 
   final List<Widget> pages = [
-    const HomePage(),
-    const HomePage(),
+    HomePage(),
+    HomePage(),
     const ProfilePage()
   ];
 
@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.deepPurple,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -35,7 +34,7 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.bookmark),
             label: "Bookmark"
           ),
-          BottomNavigationBarItem(  
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile"
           )

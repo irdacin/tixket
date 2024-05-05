@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/profile_menu.dart';
 import 'package:tixket/pages/login_page.dart';
+import 'package:tixket/pages/setting_page.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +61,14 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text("Edit Profile"),
             ),
             const SizedBox(height: 30),
-            const Divider(),
+            const Divider(height: 20, thickness: 1,),
             const SizedBox(height: 10),
             ProfileMenu(
-              onPressed: (){}, 
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const SettingPage())
+                );
+              }, 
               title: "Settings", 
               icon: Icons.settings,
               iconColor: Colors.blueAccent,
@@ -81,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
               iconColor: Colors.blueAccent,
             ),
             const SizedBox(height: 10),
-            const Divider(),
+            const Divider(height: 20, thickness: 1,),
             const SizedBox(height: 10),
             ProfileMenu(
               onPressed: (){
