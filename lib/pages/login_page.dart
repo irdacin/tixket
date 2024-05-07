@@ -30,27 +30,29 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(35),
+            padding: const EdgeInsets.all(40),
             margin: const EdgeInsets.only(top: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextButton.icon(
                   onPressed: (){
-                    Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                    Provider.of<ThemeProvider>(context, listen: false).toggleTheme(!isDarkMode);
                   }, 
                   icon: Icon(
-                    Provider.of<ThemeProvider>(context).isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                    isDarkMode ? Icons.light_mode : Icons.dark_mode,
                     color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                   label: Text(
-                    "Switch to ${Provider.of<ThemeProvider>(context).isDarkMode ? 'Light Mode': 'Dark Mode'}",
+                    "Switch to ${isDarkMode ? 'Light Mode': 'Dark Mode'}",
                     style: Theme.of(context).textTheme.bodyLarge
                   )
                 ),

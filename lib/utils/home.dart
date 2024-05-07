@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/pages/home_page.dart';
 import 'package:tixket/pages/profile_page.dart';
+import 'package:tixket/pages/wishlist.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,7 +15,7 @@ class _HomeState extends State<Home> {
 
   final List<Widget> pages = [
     HomePage(),
-    HomePage(),
+    const WishlistPage(),
     const ProfilePage()
   ];
 
@@ -31,8 +32,8 @@ class _HomeState extends State<Home> {
             label: "Home"
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: "Bookmark"
+            icon: Icon(Icons.favorite),
+            label: "Wishlist"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

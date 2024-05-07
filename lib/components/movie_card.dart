@@ -35,8 +35,7 @@ class MovieCard extends StatelessWidget {
                 child: Image.asset(
                   "assets/images/${movie.fileName}",
                   fit: BoxFit.cover,
-      width: MediaQuery.of(context).size.width/2 - 10,
-
+                  width: MediaQuery.of(context).size.width/2 - 10,
                   height: 300,
                 ),
               ),

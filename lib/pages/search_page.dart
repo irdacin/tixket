@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
             onPressed: () {
               setState(() {
                 if (customIcon.icon == Icons.search) {
-                  customIcon = Icon(Icons.cancel);
+                  customIcon = const Icon(Icons.cancel);
                   customSearchBar = const ListTile(
                     leading: Icon(
                       Icons.search,
@@ -51,12 +51,12 @@ class _SearchPageState extends State<SearchPage> {
         ],
         centerTitle: true,
       ),
-      body: Column(
+      body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Text(
+              Text(
                 "Result: ",
                 style: TextStyle(fontSize: 15),
               ),

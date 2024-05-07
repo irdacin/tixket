@@ -87,10 +87,31 @@ class MovieDetailPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  Text(movie.sinopsis),
+                  Text(
+                    movie.sinopsis,
+                    textAlign: TextAlign.justify,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if(movie.type == "Playing Now") {
+
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue,
+                      minimumSize: const Size(double.infinity, 0),
+                      padding: const EdgeInsets.all(10),
+                      textStyle: Theme.of(context).textTheme.bodyMedium,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      )
+                    ),
+                    child: const Text("BUY TICKET"),
+                  )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

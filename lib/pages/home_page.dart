@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             onPressed: (){
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => SearchPage())
+                MaterialPageRoute(builder: (context) => const SearchPage())
               );
             }, 
             icon: const Icon(

@@ -60,7 +60,12 @@ class UserProvider extends ChangeNotifier {
   }
 
   void setUser(User user) {
-    _currentUser = user;
+    for(User u in users) {
+      if(u.username == user.username) {
+        _currentUser = u;
+        break;
+      }
+    }
     notifyListeners();
   }
 }
