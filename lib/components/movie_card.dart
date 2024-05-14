@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/data/movie.dart';
-import 'package:tixket/pages/movie_detail_page.dart';
+import 'package:tixket/pages/home_pages/movie_detail_page.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -17,16 +17,16 @@ class MovieCard extends StatelessWidget {
         ),
         color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie))
-              );
-            },
-            child: Hero(
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie))
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Hero(
               tag: movie.title,
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(
@@ -40,37 +40,37 @@ class MovieCard extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5),
-            height: 48,
-            child: Text(
-              movie.title,
-              maxLines: null,
-              overflow: TextOverflow.visible,
-              style: Theme.of(context).textTheme.headlineSmall
+            Container(
+              padding: const EdgeInsets.all(5),
+              height: 48,
+              child: Text(
+                movie.title,
+                maxLines: null,
+                overflow: TextOverflow.visible,
+                style: Theme.of(context).textTheme.headlineSmall
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Row(
-              children: [
-                for(int i=0; i<5; i++) 
-                  Icon(
-                    i < movie.star.toInt() ? Icons.star : i.toDouble() < movie.star ? Icons.star_half : Icons.star_border,
-                    color: const Color(0xfff7d300),
-                  ),
-                const SizedBox(width: 5),
-                Text(
-                  movie.star.toStringAsFixed(1),
-                  style: const TextStyle(
-                    color: Color(0xfff7d300)
-                  ),
-                )
-              ],
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Row(
+                children: [
+                  for(int i=0; i<5; i++) 
+                    Icon(
+                      i < movie.star.toInt() ? Icons.star : i.toDouble() < movie.star ? Icons.star_half : Icons.star_border,
+                      color: const Color(0xfff7d300),
+                    ),
+                  const SizedBox(width: 5),
+                  Text(
+                    movie.star.toStringAsFixed(1),
+                    style: const TextStyle(
+                      color: Color(0xfff7d300)
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/profile_menu.dart';
-import 'package:tixket/pages/appearance_settings.dart';
-import 'package:tixket/pages/login_page.dart';
-import 'package:tixket/pages/notification_settings.dart';
-import 'package:tixket/pages/wishlist.dart';
+import 'package:tixket/pages/profile_pages/appearance_settings.dart';
+import 'package:tixket/pages/auth_pages/login_page.dart';
+import 'package:tixket/pages/profile_pages/notification_settings.dart';
+import 'package:tixket/pages/wishlist_pages/wishlist_page.dart';
 import 'package:tixket/providers/user_provider.dart';
 
 class ProfilePage extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tixket/pages/home_page.dart';
-import 'package:tixket/pages/profile_page.dart';
-import 'package:tixket/pages/wishlist.dart';
+import 'package:tixket/pages/home_pages/home_page.dart';
+import 'package:tixket/pages/profile_pages/profile_page.dart';
+import 'package:tixket/pages/wishlist_pages/wishlist_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,7 +16,8 @@ class _HomeState extends State<Home> {
   final List<Widget> pages = [
     HomePage(),
     const WishlistPage(),
-    const ProfilePage()
+    const WishlistPage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -26,6 +27,10 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue,
+        unselectedItemColor: Color(0xff6e6e6e),
+        type: BottomNavigationBarType.fixed,
+        unselectedFontSize: 12,
+        selectedFontSize: 12,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -34,6 +39,10 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: "Wishlist"
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(IconData(0xe25a, fontFamily: 'MaterialIcons')),
+            label: "MFood"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

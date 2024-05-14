@@ -3,30 +3,33 @@ import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
 import 'package:tixket/data/user.dart';
-import 'package:tixket/pages/signup_page.dart';
+import 'package:tixket/pages/auth_pages/login_page.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
 import 'package:tixket/utils/home.dart';
+import 'package:tixket/utils/validator.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   FocusNode focusNodeUsername = FocusNode();
   FocusNode focusNodePassword = FocusNode();
+  FocusNode focusNodeConfirmPassword = FocusNode();
 
   final formKey = GlobalKey<FormState>();
   
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
-  bool isErrorText = false;
+  bool isErrorTextUsername = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextButton.icon(
-                  onPressed: (){
+                  onPressed: () {
                     Provider.of<ThemeProvider>(context, listen: false).toggleTheme(!isDarkMode);
                   }, 
                   icon: Icon(
@@ -69,8 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: "Username",
                   focusNode: focusNodeUsername,
                   icon: Icons.person,
-                  validator: (value) => UserProvider().validateUsername(value),
-                  errorText: isErrorText ? "Wrong Username or Password" : null,
+                  validator: (value) => Validator().validateUsername(value),
+                  errorText: isErrorTextUsername ? "Username already exists" : null,
                 ),
                 const SizedBox(height: 20),
                 InputField(
@@ -87,24 +90,29 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     icon: Icon(isPasswordVisible ? Icons.visibility : Icons.visibility_off),
                   ),
-                  validator: (value) => UserProvider().validatePassword(value),
-                  errorText: isErrorText ? "Wrong Username or Password" : null,
+                  validator: (value) => Validator().validatePassword(value),
                 ),
                 const SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: (){}, 
-                    child: Text(
-                      "Forgot Password?",
-                      style: Theme.of(context).textTheme.displayMedium
-                    )
+                InputField(
+                  controller: confirmPasswordController,
+                  labelText: "Confirm Password",
+                  focusNode: focusNodeConfirmPassword,
+                  icon: Icons.lock,
+                  isVisible: isConfirmPasswordVisible,
+                  trailing: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isConfirmPasswordVisible ^= true;
+                      });
+                    },
+                    icon: Icon(isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off),
                   ),
+                  validator: (value) => Validator().validateConfirmPassword(value, passwordController.text),
                 ),
                 const SizedBox(height: 50),
                 Text(
-                  "Or Log in With",
-                  style: Theme.of(context).textTheme.displayMedium
+                  "Or Sign Up With",
+                  style: Theme.of(context).textTheme.bodyMedium
                 ),
                 const SizedBox(height: 30),
                 Row(
@@ -129,16 +137,16 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 50),
                 LoadingButton(
-                  label: "Log in",
+                  label: "Sign Up",
                   onPressed: () {
-                    if(UserProvider().validateUserLogin(usernameController.text, passwordController.text)) {
+                    if(Validator().validateUserSignUp(usernameController.text)) {
                       setState(() {
-                        isErrorText = true;
+                        isErrorTextUsername = true;
                       });
                       return;
                     } else {
                       setState(() {
-                        isErrorText = false;
+                        isErrorTextUsername = false;
                       });
                     }
 
@@ -148,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                         password: passwordController.text
                       );
 
-                      Provider.of<UserProvider>(context, listen: false).setUser(user);
+                      Provider.of<UserProvider>(context, listen: false).addUser(user);
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => const Home())
                       );
@@ -159,20 +167,20 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   children: [
                     Text(
-                      "Don't have an account? ",
-                      style: Theme.of(context).textTheme.displayMedium
+                      "Already have an account?",
+                      style: Theme.of(context).textTheme.bodyMedium
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => const SignUpPage())
+                          MaterialPageRoute(builder: (context) => const LoginPage())
                         );
                       },
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.blue,
                         textStyle: Theme.of(context).textTheme.bodyMedium
                       ),
-                      child: const Text("Sign up"),
+                      child: const Text("Login"),
                     )
                   ],
                 )
