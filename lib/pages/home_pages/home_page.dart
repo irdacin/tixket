@@ -68,7 +68,9 @@ class HomePage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: playingNowMovies.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => MovieCard(movie: playingNowMovies[index]),
+                itemBuilder: (context, index) {
+                  return MovieCard(movie: playingNowMovies[index]);
+                },
               ),
             ),
             const SizedBox(height: 10),

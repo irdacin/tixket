@@ -42,8 +42,14 @@ class LightTheme {
         fontSize: 16,
         fontWeight: FontWeight.w600
       ),
+      bodyLarge: TextStyle(
+        fontSize: 20
+      ),
       bodyMedium: TextStyle(
         fontSize: 16
+      ),
+      bodySmall: TextStyle(
+        fontSize: 14
       ),
     ),
   );
@@ -91,9 +97,15 @@ class DarkTheme {
         fontSize: 16,
         fontWeight: FontWeight.w600
       ),
+      bodyLarge: TextStyle(
+        fontSize: 20
+      ),
       bodyMedium: TextStyle(
         fontSize: 16
-      )
+      ),
+      bodySmall: TextStyle(
+        fontSize: 14
+      ),
     ),
   );
 }

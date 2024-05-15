@@ -7,7 +7,7 @@ import 'package:tixket/pages/auth_pages/forgot_password_page.dart';
 import 'package:tixket/pages/auth_pages/signup_page.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/utils/home.dart';
+import 'package:tixket/pages/home.dart';
 import 'package:tixket/utils/validator.dart';
 
 class LoginPage extends StatefulWidget {
