@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tixket/pages/auth_pages/login_page.dart';
+import 'package:tixket/pages/auth/login_page.dart';
+import 'package:tixket/providers/favorite_movie_provider.dart';
 import 'package:tixket/providers/notification_provider.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProvider(create: (context) => FavoriteMovieProvider()),
       ],
       builder: (context, child) {
         return MaterialApp(

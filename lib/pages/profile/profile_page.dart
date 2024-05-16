@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/profile_menu.dart';
-import 'package:tixket/pages/profile_pages/appearance_settings.dart';
-import 'package:tixket/pages/auth_pages/login_page.dart';
-import 'package:tixket/pages/profile_pages/notification_settings.dart';
-import 'package:tixket/pages/wishlist_pages/wishlist_page.dart';
+import 'package:tixket/pages/profile/appearance_settings.dart';
+import 'package:tixket/pages/auth/login_page.dart';
+import 'package:tixket/pages/profile/notification_settings.dart';
+import 'package:tixket/pages/favorite/favorite_page.dart';
 import 'package:tixket/providers/user_provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -97,10 +97,10 @@ class ProfilePage extends StatelessWidget {
                     ProfileMenu(
                       onPressed: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const WishlistPage(),)
+                          MaterialPageRoute(builder: (context) => const FavoritePage())
                         );
                       }, 
-                      title: "Wishlist", 
+                      title: "Favorite", 
                       icon: Icons.favorite,
                       iconColor: Colors.blueAccent,
                     ),

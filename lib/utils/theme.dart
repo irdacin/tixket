@@ -22,6 +22,9 @@ class LightTheme {
         fontSize: 18,
         fontWeight: FontWeight.bold
       ),
+      displayLarge: TextStyle(
+        fontSize: 20,
+      ),
       displayMedium: TextStyle(
         fontSize: 16,
         color: Color(0xff6e6e6e)
@@ -41,9 +44,6 @@ class LightTheme {
       headlineSmall: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 20
       ),
       bodyMedium: TextStyle(
         fontSize: 16
@@ -77,6 +77,9 @@ class DarkTheme {
         fontSize: 18,
         fontWeight: FontWeight.bold
       ),
+      displayLarge: TextStyle(
+        fontSize: 20,
+      ),
       displayMedium: TextStyle(
         fontSize: 16,
         color: Color(0xff9e9e9e)
@@ -96,9 +99,6 @@ class DarkTheme {
       headlineSmall: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 20
       ),
       bodyMedium: TextStyle(
         fontSize: 16

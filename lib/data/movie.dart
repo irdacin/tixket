@@ -38,7 +38,7 @@ List<Movie> movies = [
     type: "Playing Now"
   ),
   Movie(
-    title: "Starwars: The rise of skywalker", 
+    title: "Starwars: The rise of skywalkers", 
     fileName: "starwars-the-rise-of-skywalker.jpeg", 
     sinopsis: "Resistance berusaha bangkit untuk melawan First Order. Dalam trailer Star Wars: The Rise of Skywalker yang rilis beberapa waktu lalu terlihat Poe Dameron (Oscar Isaac) mulai mengumpulkan orang-orang untuk kembali membangun Resistance. Salah satu orang yang membantu Resistance adalah Lando Calrissian (Billy Dee Williams), karakter lama yang pernah muncul dalam seri film Star Wars. Ia pernah muncul dalam Star Wars: The Empire Strikes Back (1980) dan Star Wars: Return of the Jedi (1983).",
     star: 3.5,

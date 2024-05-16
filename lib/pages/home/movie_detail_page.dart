@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:tixket/components/read_more_text.dart';
 import 'package:tixket/data/movie.dart';
+import 'package:tixket/providers/favorite_movie_provider.dart';
 
-class MovieDetailPage extends StatefulWidget {
+class MovieDetailPage extends StatelessWidget {
   final Movie movie;
 
   const MovieDetailPage({
@@ -12,15 +13,9 @@ class MovieDetailPage extends StatefulWidget {
   });
 
   @override
-  State<MovieDetailPage> createState() => _MovieDetailPageState();
-}
-
-class _MovieDetailPageState extends State<MovieDetailPage> {
-  bool isReadSynopsis = false;
-  bool isFavorite = false;
-
-  @override
   Widget build(BuildContext context) {
+    bool isFavorite = Provider.of<FavoriteMovieProvider>(context).favoriteMovie.any((element) => element == movie);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -36,18 +31,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               size: 25,
             ),
           ),
-          IconButton(
-            onPressed: (){
-              setState(() {
-                isFavorite ^= true;
-              });
-            },
-            icon: Icon( 
-              isFavorite ? Icons.favorite : Icons.favorite_outline,
-              color: isFavorite ? Colors.red : null,
-              size: 25,
-            ),
-          ),
         ],
       ),
       body: Stack(
@@ -57,24 +40,53 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             left: 0,
             right: 0,
             child: Hero(
-              tag: widget.movie.title, 
+              tag: movie.title, 
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height/2.5,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   image: DecorationImage(
-                    image: AssetImage("assets/images/${widget.movie.fileName}"),
+                    image: AssetImage("assets/images/${movie.fileName}"),
                     fit: BoxFit.cover,
                     opacity: 0.6
                   ),
                 ),
                 child: Container(
                   padding: const EdgeInsets.all(15),
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    widget.movie.title,
-                    style: Theme.of(context).textTheme.headlineMedium!.apply(color: Colors.white),
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.75,
+                        child: Text(
+                          movie.title,
+                          style: Theme.of(context).textTheme.headlineMedium!.apply(color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.background,
+                          borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: IconButton(
+                          onPressed: (){
+                            if(!isFavorite) {
+                              Provider.of<FavoriteMovieProvider>(context, listen: false).addMovie(movie);
+                            } else {
+                              Provider.of<FavoriteMovieProvider>(context, listen: false).removeMovie(movie);
+                            }
+                          },
+                          icon: Icon( 
+                            isFavorite ? Icons.favorite : Icons.favorite_outline,
+                            color: isFavorite ? Colors.red : null,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )
@@ -91,24 +103,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.movie.sinopsis,
+                    ReadMoreText(
+                      movie.sinopsis,
                       textAlign: TextAlign.justify,
-                      style: Theme.of(context).textTheme.bodySmall,
-                      maxLines: isReadSynopsis ? null : 4,
-                      overflow: isReadSynopsis ? null : TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 10),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isReadSynopsis ^= true;
-                        });
-                      },
-                      child: Text(
-                        isReadSynopsis ? "HIDE" : "READ SYNOPSIS",
-                        style: Theme.of(context).textTheme.bodyLarge?.apply(color: Colors.blue)
-                      ),
+                      textStyle: Theme.of(context).textTheme.bodySmall,
+                      trimLines: 4,
+                      textTrimStyle: Theme.of(context).textTheme.displayLarge?.apply(color: Colors.blue),
+                      trimCollapsedText: "READ SYNOPSIS",
+                      trimExpandedText: "HIDE",
                     ),
                     const SizedBox(height: 30),
                     Text(
@@ -116,46 +118,46 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
-                      widget.movie.producer,
+                      movie.producer,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       "Director:",
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
-                      widget.movie.director,
+                      movie.director,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       "Writer:",
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
-                      widget.movie.writer,
+                      movie.writer,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       "Cast:",
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
-                      widget.movie.cast,
+                      movie.cast,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       "Distributor:",
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Text(
-                      widget.movie.distributor,
+                      movie.distributor,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -167,13 +169,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             bottom: 10,
             child: ElevatedButton(
               onPressed: () {
-                if(widget.movie.type == "Playing Now") {
+                if(movie.type == "Playing Now") {
             
                 }
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: widget.movie.type == "Playing Now" ? Colors.blue : Color(0xffc0c0c0),
+                backgroundColor: movie.type == "Playing Now" ? Colors.blue : const Color(0xffc0c0c0),
                 textStyle: Theme.of(context).textTheme.headlineMedium,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(

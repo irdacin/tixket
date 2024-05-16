@@ -32,7 +32,7 @@ class NotificationSettings extends StatelessWidget {
                 ),
                 title: Text(
                   "In-app notification",
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 subtitle: Text(
                   "Get notification on tixket",
@@ -63,7 +63,7 @@ class NotificationSettings extends StatelessWidget {
                     ),
                     title: Text(
                       "Recommended movies",
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     subtitle: Text(
                       "Notify me of movies I might like",
@@ -83,7 +83,7 @@ class NotificationSettings extends StatelessWidget {
                     ),
                     title: Text(
                       "Updated movies",
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     subtitle: Text(
                       "Notify me of new movies update and announcement",

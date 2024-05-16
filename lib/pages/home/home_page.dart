@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/components/movie_card.dart';
 import 'package:tixket/data/movie.dart';
-import 'package:tixket/pages/home_pages/search_page.dart';
-import 'package:tixket/pages/home_pages/view_all_page.dart';
+import 'package:tixket/pages/home/search_page.dart';
+import 'package:tixket/pages/home/view_all_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

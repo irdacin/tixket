@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/data/movie.dart';
-import 'package:tixket/pages/home_pages/movie_detail_page.dart';
+import 'package:tixket/pages/home/movie_detail_page.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
