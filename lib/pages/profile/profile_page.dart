@@ -1,20 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/profile_menu.dart';
-import 'package:tixket/pages/profile/appearance_settings.dart';
+import 'package:tixket/main.dart';
+import 'package:tixket/pages/profile/appearance_page.dart';
 import 'package:tixket/pages/auth/login_page.dart';
-import 'package:tixket/pages/profile/notification_settings.dart';
+import 'package:tixket/pages/profile/account_page.dart';
+import 'package:tixket/pages/profile/notification_page.dart';
 import 'package:tixket/pages/favorite/favorite_page.dart';
 import 'package:tixket/providers/user_provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> with RouteAware {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute) {
+      routeObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile", style: Theme.of(context).textTheme.headlineLarge,),
+        title: Text("Profile", style: Theme.of(context).textTheme.headlineLarge),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -22,38 +44,39 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: 120,
                 height: 120,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    "assets/images/${Provider.of<UserProvider>(context).currentUser?.profilePicture}",
-                    fit: BoxFit.cover,
-                  ),
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  child: currentUser!.profilePicture.isEmpty ? const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 80,
+                  ) : Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      image: DecorationImage(
+                        image: NetworkImage(currentUser!.profilePicture),
+                        fit: BoxFit.cover,
+                      )
+                    ),
+                  )
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                Provider.of<UserProvider>(context).currentUser!.username,
+                currentUser!.username,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: (){},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  fixedSize: const Size(200, 40),
-                  textStyle: Theme.of(context).textTheme.bodyMedium
-                ), 
-                child: const Text("Edit Profile"),
+              const SizedBox(height: 5),
+              Text(
+                currentUser!.email,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
-              const SizedBox(height: 30),
-              const Divider(height: 20, thickness: 1,),
-              const SizedBox(height: 10),
+              const SizedBox(height: 50),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -64,7 +87,17 @@ class ProfilePage extends StatelessWidget {
                     ProfileMenu(
                       onPressed: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const NotificationSettings(),)
+                          MaterialPageRoute(builder: (context) => const AccountPage())
+                        );
+                      }, 
+                      title: "Account", 
+                      icon: Icons.account_circle_rounded,
+                      iconColor: Colors.blueAccent,
+                    ),
+                    ProfileMenu(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const NotificationPage())
                         );
                       }, 
                       title: "Notifications", 
@@ -74,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                     ProfileMenu(
                       onPressed: () { 
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const AppearanceSettings(),)
+                          MaterialPageRoute(builder: (context) => const AppearancePage(),)
                         );
                       }, 
                       title: "Appearance", 
@@ -85,7 +118,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              const Divider(height: 20, thickness: 1,),
+              Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),
               const SizedBox(height: 5),
               Container(
                 decoration: BoxDecoration(
@@ -114,7 +147,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              const Divider(height: 20, thickness: 1,),
+              Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),
               const SizedBox(height: 5),
               Container(
                 decoration: BoxDecoration(
@@ -123,11 +156,46 @@ class ProfilePage extends StatelessWidget {
                 ),
                 child: ProfileMenu(
                   onPressed: (){
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const LoginPage()), 
-                      (route) => false
+                    showDialog(
+                      context: context, 
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                          title: const Text("Log Out"),
+                          titleTextStyle: Theme.of(context).textTheme.headlineMedium,
+                          content: const Text("Are you sure you want to log out?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "CANCEL",
+                                style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.blue),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (context) => const LoginPage()), 
+                                  (route) => false
+                                );
+                                Provider.of<UserProvider>(context, listen: false).logOut();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                foregroundColor: Colors.white
+                              ),
+                              child: Text(
+                                "LOG OUT", 
+                                style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),
+                              ),
+                            )
+                          ],
+                        );
+                      }
                     );
-                  }, 
+                  },
                   title: "Log out", 
                   textColor: Colors.red,
                   icon: Icons.logout,

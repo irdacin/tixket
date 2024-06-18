@@ -3,14 +3,14 @@ import 'package:tixket/pages/home/home_page.dart';
 import 'package:tixket/pages/profile/profile_page.dart';
 import 'package:tixket/pages/favorite/favorite_page.dart';
 
-class Main extends StatefulWidget {
-  const Main({super.key});
+class IndexPage extends StatefulWidget {
+  const IndexPage({super.key});
 
   @override
-  State<Main> createState() => _MainState();
+  State<IndexPage> createState() => _IndexPageState();
 }
 
-class _MainState extends State<Main> {
+class _IndexPageState extends State<IndexPage> {
   int _currentIndex = 0;
 
   final List<Widget> pages = [
@@ -34,7 +34,7 @@ class _MainState extends State<Main> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Main"
+            label: "Home"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),

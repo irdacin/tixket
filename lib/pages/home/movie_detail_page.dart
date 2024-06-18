@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/read_more_text.dart';
-import 'package:tixket/data/movie.dart';
+import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 
 class MovieDetailPage extends StatelessWidget {
@@ -68,7 +68,7 @@ class MovieDetailPage extends StatelessWidget {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).cardColor,
                           borderRadius: const BorderRadius.all(Radius.circular(50)),
                         ),
                         child: IconButton(
@@ -170,12 +170,12 @@ class MovieDetailPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 if(movie.type == "Playing Now") {
-            
+                  
                 }
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: movie.type == "Playing Now" ? Colors.blue : const Color(0xffc0c0c0),
+                backgroundColor: movie.type == "Playing Now" ? Colors.blue : const Color(0xffaaaaaa),
                 textStyle: Theme.of(context).textTheme.headlineMedium,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(

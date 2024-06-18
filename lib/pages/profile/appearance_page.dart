@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/providers/theme_provider.dart';
 
-class AppearanceSettings extends StatelessWidget {
-  const AppearanceSettings({super.key});
+class AppearancePage extends StatelessWidget {
+  const AppearancePage({super.key});
 
   @override
   Widget build(BuildContext context) {

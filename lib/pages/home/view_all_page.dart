@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/components/movie_card.dart';
-import 'package:tixket/data/movie.dart';
+import 'package:tixket/models/movie_model.dart';
 
 class ViewAllPage extends StatelessWidget {
   final List<Movie> movies;
@@ -21,13 +21,17 @@ class ViewAllPage extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: (MediaQuery.of(context).size.width / 2 - 10) / 370
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        width: MediaQuery.of(context).size.width,
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: (MediaQuery.of(context).size.width / 2 - 20) / 370
+          ),
+          itemCount: movies.length,
+          itemBuilder: (context, index) => MovieCard(movie: movies[index]),
         ),
-        itemCount: movies.length,
-        itemBuilder: (context, index) => MovieCard(movie: movies[index]),
       ),
     );
   }

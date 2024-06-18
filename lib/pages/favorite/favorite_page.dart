@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tixket/data/movie.dart';
-import 'package:tixket/pages/main.dart';
+import 'package:tixket/models/movie_model.dart';
+import 'package:tixket/pages/index_page.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -35,7 +35,7 @@ class FavoritePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const Main()),
+                  MaterialPageRoute(builder: (context) => const IndexPage()),
                   (route) => false,
                 );
               },

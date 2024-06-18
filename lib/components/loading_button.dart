@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class LoadingButton extends StatefulWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
   final String label;
   final Duration delay;
+  final ButtonStyle? style;
 
   const LoadingButton({
     super.key,
     required this.onPressed,
     required this.label,
-    this.delay = const Duration(seconds: 1),
+    this.delay = const Duration(seconds: 1), 
+    this.style,
   });
 
   @override
@@ -24,15 +26,17 @@ class _LoadingButtonState extends State<LoadingButton> {
     return ElevatedButton(
       onPressed: () async {
         setState(() {
-          isLoading = true;
+          if(widget.onPressed != null) {
+            isLoading = true;
+          }
         });
         await Future.delayed(widget.delay);
-        widget.onPressed();
+        widget.onPressed?.call();
         setState(() {
           isLoading = false;
         });
       },
-      style: ElevatedButton.styleFrom(
+      style: widget.style ?? ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 0),
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,

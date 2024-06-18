@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
-import 'package:tixket/data/user.dart';
+import 'package:tixket/models/user_model.dart';
 import 'package:tixket/pages/auth/forgot_password_page.dart';
 import 'package:tixket/pages/auth/signup_page.dart';
+import 'package:tixket/pages/index_page.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/pages/main.dart';
 import 'package:tixket/utils/validator.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,8 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController(text: "mantacore");
+  TextEditingController passwordController = TextEditingController(text: "123456");
 
   FocusNode focusNodeUsername = FocusNode();
   FocusNode focusNodePassword = FocusNode();
@@ -68,10 +68,10 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50),
                 InputField(
                   controller: usernameController,
-                  labelText: "Username",
+                  labelText: "Username or email address",
                   focusNode: focusNodeUsername,
                   icon: Icons.person,
-                  validator: (value) => Validator().validateUsername(value),
+                  validator: (value) => Validator().generalValidation(value, "Username"),
                   errorText: isErrorText ? "Wrong Username or Password" : null,
                 ),
                 const SizedBox(height: 20),
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     icon: Icon(isPasswordVisible ? Icons.visibility : Icons.visibility_off),
                   ),
-                  validator: (value) => Validator().validatePassword(value),
+                  validator: (value) => Validator().generalValidation(value, "Password"),
                   errorText: isErrorText ? "Wrong Username or Password" : null,
                 ),
                 const SizedBox(height: 5),
@@ -137,26 +137,22 @@ class _LoginPageState extends State<LoginPage> {
                 LoadingButton(
                   label: "Log in",
                   onPressed: () {
-                    if(Validator().validateUserLogin(usernameController.text, passwordController.text)) {
-                      setState(() {
-                        isErrorText = true;
-                      });
-                      return;
-                    } else {
-                      setState(() {
-                        isErrorText = false;
-                      });
-                    }
-
                     if(formKey.currentState!.validate()) {
-                      User user = User(
-                        username: usernameController.text,
-                        password: passwordController.text
-                      );
-
+                      User? user = Validator().validateUserLogin(usernameController.text, passwordController.text);
+                      if(user == null){
+                        setState(() {
+                          isErrorText = true;
+                        });
+                        return;
+                      } else {
+                        setState(() {
+                          isErrorText = false;
+                        });
+                      }
+                    
                       Provider.of<UserProvider>(context, listen: false).setUser(user);
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const Main())
+                        MaterialPageRoute(builder: (context) => const IndexPage())
                       );
                     }
                   }

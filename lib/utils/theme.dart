@@ -6,17 +6,19 @@ class LightTheme {
       primary: Colors.black,
       error: Colors.red,
       onError: Colors.red,
-      background: Color(0xfff0f0f0),
-      onBackground: Color(0xffd9d9d9),
       onPrimaryContainer: Colors.white,
+      onPrimaryFixed: Color(0xffd9d9d9),
       secondary: Color(0xffbebebe),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xfff0f0f0),
     ),
+    cardColor: Colors.white,
+    scaffoldBackgroundColor: const Color(0xfff0f0f0),
     brightness: Brightness.light,
     useMaterial3: true,
     fontFamily: 'Poppins',
+    dialogBackgroundColor: Colors.white,
     textTheme: const TextTheme(
       labelMedium: TextStyle(
         fontSize: 18,
@@ -59,16 +61,17 @@ class DarkTheme {
   ThemeData theme = ThemeData(
     colorScheme: const ColorScheme.dark(
       primary: Colors.white,
-      background: Color(0xff121212),
-      onBackground: Color(0xff222222),
       error: Colors.red,
       onError: Colors.red,
       onPrimaryContainer: Color(0xff202020),
-      secondary: Color(0xff6e6e6e)
+      onPrimaryFixed: Color(0xff222222),
+      secondary: Color(0xff9e9e9e)
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xff121212)
     ),
+    scaffoldBackgroundColor: const Color(0xff121212),
+    cardColor: const Color(0xff202020),
     brightness: Brightness.dark,
     useMaterial3: true,
     fontFamily: 'Poppins',

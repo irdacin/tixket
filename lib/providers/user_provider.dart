@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:tixket/data/user.dart';
+import 'package:tixket/data/user_data.dart';
+import 'package:tixket/models/user_model.dart';
+
+User? currentUser;
 
 class UserProvider extends ChangeNotifier {
-  User? _currentUser;
-  User? get currentUser => _currentUser;
-
   void addUser(User user) {
-    _currentUser = user;
+    currentUser = user;
     users.add(user);
     notifyListeners();
   }
 
   void setUser(User user) {
-    for(User u in users) {
-      if(u.username == user.username) {
-        _currentUser = u;
-        break;
-      }
-    }
+    currentUser = user;
     notifyListeners();
   }
 
+  void logOut() {
+    currentUser = null;
+    notifyListeners();
+  }
+
+  void delete() {
+    users.remove(currentUser);
+    currentUser = null;
+    notifyListeners();
+  }
 }

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
-import 'package:tixket/data/user.dart';
+import 'package:tixket/models/user_model.dart';
 import 'package:tixket/pages/auth/login_page.dart';
+import 'package:tixket/pages/index_page.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/pages/main.dart';
 import 'package:tixket/utils/validator.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -18,10 +18,12 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
   FocusNode focusNodeUsername = FocusNode();
+  FocusNode focusNodeEmail = FocusNode();
   FocusNode focusNodePassword = FocusNode();
   FocusNode focusNodeConfirmPassword = FocusNode();
 
@@ -30,6 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
   bool isErrorTextUsername = false;
+  bool isErrorTextEmail = false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +77,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   icon: Icons.person,
                   validator: (value) => Validator().validateUsername(value),
                   errorText: isErrorTextUsername ? "Username already exists" : null,
+                ),
+                const SizedBox(height: 20),
+                InputField(
+                  controller: emailController,
+                  labelText: "Email",
+                  focusNode: focusNodeEmail,
+                  icon: Icons.email,
+                  validator: (value) => Validator().validateEmail(value),
+                  errorText: isErrorTextEmail ? "Email already exists" : null,
                 ),
                 const SizedBox(height: 20),
                 InputField(
@@ -139,26 +151,25 @@ class _SignUpPageState extends State<SignUpPage> {
                 LoadingButton(
                   label: "Sign Up",
                   onPressed: () {
-                    if(Validator().validateUserSignUp(usernameController.text)) {
-                      setState(() {
-                        isErrorTextUsername = true;
-                      });
+                    setState(() {
+                      isErrorTextUsername = Validator().validateUsernameSignUp(usernameController.text);
+                      isErrorTextEmail = Validator().validateEmailSignUp(emailController.text);
+                    });
+
+                    if(isErrorTextUsername || isErrorTextEmail) {
                       return;
-                    } else {
-                      setState(() {
-                        isErrorTextUsername = false;
-                      });
                     }
 
                     if(formKey.currentState!.validate()) {
                       User user = User(
                         username: usernameController.text,
-                        password: passwordController.text
+                        password: passwordController.text,
+                        email: emailController.text
                       );
 
                       Provider.of<UserProvider>(context, listen: false).addUser(user);
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const Main())
+                        MaterialPageRoute(builder: (context) => const IndexPage())
                       );
                     }
                   }

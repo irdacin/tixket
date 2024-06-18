@@ -5,11 +5,17 @@ import 'package:tixket/providers/favorite_movie_provider.dart';
 import 'package:tixket/providers/notification_provider.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
+import 'package:tixket/utils/local_notifications.dart';
 import 'package:tixket/utils/theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotifications.init();
+
   runApp(const MyApp());
 }
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -27,6 +33,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
+          navigatorObservers: [routeObserver],
           theme: LightTheme().theme,
           darkTheme: DarkTheme().theme,
           themeMode: Provider.of<ThemeProvider>(context).themeMode,

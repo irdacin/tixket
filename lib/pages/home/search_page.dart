@@ -38,9 +38,9 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         border: InputBorder.none,
                       ),
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
+                      // style: TextStyle(
+                      //   color: Colors.black,
+                      // ),
                     ),
                   );
                 }

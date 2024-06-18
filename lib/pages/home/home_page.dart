@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/components/movie_card.dart';
-import 'package:tixket/data/movie.dart';
+import 'package:tixket/data/movie_data.dart';
+import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/pages/home/search_page.dart';
 import 'package:tixket/pages/home/view_all_page.dart';
 
@@ -29,7 +30,8 @@ class HomePage extends StatelessWidget {
               Icons.search,
               size: 28,
             )
-          )
+          ),
+          const SizedBox(width: 10)
         ],
       ),
       body: SingleChildScrollView(
@@ -69,7 +71,10 @@ class HomePage extends StatelessWidget {
                 itemCount: playingNowMovies.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return MovieCard(movie: playingNowMovies[index]);
+                  return Container(
+                    padding: (index == 0) ? const EdgeInsets.only(left: 5) : (index == playingNowMovies.length - 1) ? const EdgeInsets.only(right: 5) : null,
+                    child: MovieCard(movie: playingNowMovies[index]),
+                  );
                 },
               ),
             ),
@@ -102,12 +107,18 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            Container(
+              margin: const EdgeInsets.only(bottom: 12),
               height: 400,
               child: ListView.builder(
                 itemCount: comingSoonMovies.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => MovieCard(movie: comingSoonMovies[index]),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: (index == 0) ? const EdgeInsets.only(left: 5) : (index == comingSoonMovies.length - 1) ? const EdgeInsets.only(right: 5) : null,
+                    child: MovieCard(movie: comingSoonMovies[index])
+                  );
+                },
               ),
             ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tixket/data/movie.dart';
+import 'package:tixket/models/movie_model.dart';
 
 class FavoriteMovieProvider extends ChangeNotifier {
   List<Movie> favoriteMovie = [];

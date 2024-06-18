@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tixket/data/movie.dart';
+import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/pages/home/movie_detail_page.dart';
 
 class MovieCard extends StatelessWidget {
@@ -8,68 +8,65 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      width: MediaQuery.of(context).size.width/2 - 10,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(20)
-        ),
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      color: Theme.of(context).cardColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15)
       ),
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie))
-          );
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Hero(
-              tag: movie.title,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20)
+      margin: const EdgeInsets.symmetric(horizontal: 7),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width / 2 - 20,
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie))
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Hero(
+                tag: movie.title,
+                child: ClipRRect(
+                  child: Image.asset(
+                    "assets/images/${movie.fileName}",
+                    fit: BoxFit.cover,
+                    height: 300,
+                  ),
                 ),
-                child: Image.asset(
-                  "assets/images/${movie.fileName}",
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width/2 - 10,
-                  height: 300,
+              ),
+              Container(
+                padding: const EdgeInsets.all(5),
+                height: 48,
+                child: Text(
+                  movie.title,
+                  maxLines: null,
+                  overflow: TextOverflow.visible,
+                  style: Theme.of(context).textTheme.headlineSmall
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(5),
-              height: 48,
-              child: Text(
-                movie.title,
-                maxLines: null,
-                overflow: TextOverflow.visible,
-                style: Theme.of(context).textTheme.headlineSmall
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  children: [
+                    for(int i=0; i<5; i++) 
+                      Icon(
+                        i < movie.star.toInt() ? Icons.star : i.toDouble() < movie.star ? Icons.star_half : Icons.star_border,
+                        color: const Color(0xfff7d300),
+                      ),
+                    const SizedBox(width: 5),
+                    Text(
+                      movie.star.toStringAsFixed(1),
+                      style: const TextStyle(
+                        color: Color(0xfff7d300)
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Row(
-                children: [
-                  for(int i=0; i<5; i++) 
-                    Icon(
-                      i < movie.star.toInt() ? Icons.star : i.toDouble() < movie.star ? Icons.star_half : Icons.star_border,
-                      color: const Color(0xfff7d300),
-                    ),
-                  const SizedBox(width: 5),
-                  Text(
-                    movie.star.toStringAsFixed(1),
-                    style: const TextStyle(
-                      color: Color(0xfff7d300)
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

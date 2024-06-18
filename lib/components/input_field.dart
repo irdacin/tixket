@@ -7,6 +7,7 @@ class InputField extends StatefulWidget {
   final Widget? trailing;
   final TextEditingController? controller;
   final FormFieldValidator? validator;
+  final Function(String)? onChanged;
   final bool isVisible;
   final String? hintText;
   final String? errorText;
@@ -19,9 +20,10 @@ class InputField extends StatefulWidget {
     this.trailing,
     this.controller,
     this.validator,
+    this.onChanged,
     this.isVisible = true,
     this.hintText,
-    this.errorText,
+    this.errorText, 
   });
 
   @override
@@ -53,6 +55,7 @@ class _InputFieldState extends State<InputField> {
       controller: widget.controller,
       validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onChanged: (value) => widget.onChanged?.call(value),
       focusNode: widget.focusNode,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -88,12 +91,17 @@ class _InputFieldState extends State<InputField> {
           focusText ? const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-          ) : null,
+          ) : const TextStyle(
+            fontSize: 15,
+          ) ,
         hintText: widget.hintText,
         errorText: widget.errorText,
+        errorStyle: const TextStyle(
+          fontSize: 12
+        ),
         prefixIcon: Icon(widget.icon),
         filled: true,
-        fillColor: Theme.of(context).colorScheme.onBackground,
+        fillColor: Theme.of(context).colorScheme.onPrimaryFixed,
         suffixIcon: widget.trailing,
       ),
       obscureText: !widget.isVisible,

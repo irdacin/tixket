@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/providers/notification_provider.dart';
 
-class NotificationSettings extends StatelessWidget {
-  const NotificationSettings({super.key});
+class NotificationPage extends StatelessWidget {
+  const NotificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class NotificationSettings extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5),
-            const Divider(height: 20, thickness: 1,),
+            Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),
             const SizedBox(height: 5),
             Container(
               decoration: BoxDecoration(
