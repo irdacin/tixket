@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadingButton extends StatefulWidget {
-  final Function()? onPressed;
+  final void Function()? onPressed;
   final String label;
   final Duration delay;
   final ButtonStyle? style;

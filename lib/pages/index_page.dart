@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/pages/home/home_page.dart';
 import 'package:tixket/pages/profile/profile_page.dart';
-import 'package:tixket/pages/favorite/favorite_page.dart';
+import 'package:tixket/pages/home/favorite_page.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({super.key});
@@ -15,7 +15,6 @@ class _IndexPageState extends State<IndexPage> {
 
   final List<Widget> pages = [
     HomePage(),
-    const FavoritePage(),
     const FavoritePage(),
     const ProfilePage(),
   ];
@@ -37,12 +36,8 @@ class _IndexPageState extends State<IndexPage> {
             label: "Home"
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Favorite"
-          ),
-          BottomNavigationBarItem(
             icon: Icon(IconData(0xe25a, fontFamily: 'MaterialIcons')),
-            label: "M.Food"
+            label: "F&B"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

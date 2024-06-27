@@ -27,6 +27,7 @@ class ViewAllPage extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
+            mainAxisSpacing: 20,
             childAspectRatio: (MediaQuery.of(context).size.width / 2 - 20) / 370
           ),
           itemCount: movies.length,

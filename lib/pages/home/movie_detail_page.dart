@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/read_more_text.dart';
 import 'package:tixket/models/movie_model.dart';
+import 'package:tixket/pages/home/buy_movie_page.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 
 class MovieDetailPage extends StatelessWidget {
@@ -25,12 +26,135 @@ class MovieDetailPage extends StatelessWidget {
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: (){},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context, 
+                builder: (context) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              icon: const Icon(Icons.close)
+                            ),
+                            Text(
+                              "Share this movie",
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          movie.title,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/${movie.fileName}"),
+                              fit: BoxFit.cover
+                            ),
+                            borderRadius: BorderRadius.circular(20)
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),
+                        const SizedBox(height: 10),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  const CircleAvatar(
+                                    child: Icon(Icons.link),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Copy Link",
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const CircleAvatar(
+                                    child: Icon(Icons.abc_outlined),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Whatsapp",
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const CircleAvatar(
+                                    child: Icon(Icons.abc_outlined),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Whatsapp",
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const CircleAvatar(
+                                    child: Icon(Icons.abc_outlined),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Whatsapp",
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  const CircleAvatar(
+                                    child: Icon(Icons.abc_outlined),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Whatsapp",
+                                    style: Theme.of(context).textTheme.bodySmall,
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            tooltip: "Share",
             icon: const Icon(
               Icons.share_outlined,
               size: 25,
             ),
           ),
+          const SizedBox(width: 10)
         ],
       ),
       body: Stack(
@@ -39,19 +163,19 @@ class MovieDetailPage extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            child: Hero(
-              tag: movie.title, 
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/2.5,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/${movie.fileName}"),
-                    fit: BoxFit.cover,
-                    opacity: 0.6
-                  ),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height/2.5,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                image: DecorationImage(
+                  image: AssetImage("assets/images/${movie.fileName}"),
+                  fit: BoxFit.cover,
+                  opacity: 0.6
                 ),
+              ),
+              child: Hero(
+                tag: movie.title,
                 child: Container(
                   padding: const EdgeInsets.all(15),
                   alignment: Alignment.bottomCenter,
@@ -79,6 +203,7 @@ class MovieDetailPage extends StatelessWidget {
                               Provider.of<FavoriteMovieProvider>(context, listen: false).removeMovie(movie);
                             }
                           },
+                          tooltip: !isFavorite ? "Add to favorite" : "Remove to favorite",
                           icon: Icon( 
                             isFavorite ? Icons.favorite : Icons.favorite_outline,
                             color: isFavorite ? Colors.red : null,
@@ -89,7 +214,7 @@ class MovieDetailPage extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
             ),
           ),
           Positioned(
@@ -164,25 +289,45 @@ class MovieDetailPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 15,
-            right: 15,
-            bottom: 10,
-            child: ElevatedButton(
-              onPressed: () {
-                if(movie.type == "Playing Now") {
-                  
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: movie.type == "Playing Now" ? Colors.blue : const Color(0xffaaaaaa),
-                textStyle: Theme.of(context).textTheme.headlineMedium,
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
-                )
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: ElevatedButton(
+                onPressed: () {
+                  if(movie.type == "Coming Soon") return;
+              
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => BuyMoviePage(movie: movie),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(0.0, 1.0);
+                        const end = Offset.zero;
+                        const curve = Curves.ease;
+              
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    )
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: movie.type == "Playing Now" ? Colors.blue : Theme.of(context).colorScheme.secondary,
+                  textStyle: Theme.of(context).textTheme.headlineMedium,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                  )
+                ),
+                child: const Text("BUY TICKET"),
               ),
-              child: const Text("BUY TICKET"),
             ),
           )
         ],

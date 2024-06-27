@@ -22,4 +22,13 @@ class Movie {
     this.distributor = "",
     required this.type
   });
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+      other is Movie && runtimeType == other.runtimeType && title == other.title;
+  }
+
+  @override
+  int get hashCode => title.hashCode;
 }

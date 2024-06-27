@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tixket/components/movie_card.dart';
 import 'package:tixket/data/movie_data.dart';
 import 'package:tixket/models/movie_model.dart';
+import 'package:tixket/pages/home/booking_history_page.dart';
+import 'package:tixket/pages/home/favorite_page.dart';
+import 'package:tixket/pages/home/offer_page.dart';
 import 'package:tixket/pages/home/search_page.dart';
 import 'package:tixket/pages/home/view_all_page.dart';
 
@@ -21,15 +24,66 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: (){
+            onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const SearchPage())
               );
             }, 
+            tooltip: "Search",
             icon: const Icon(
               Icons.search,
               size: 28,
             )
+          ),
+          PopupMenuButton(
+            icon: const Icon(
+              Icons.more_vert,
+              size: 28,
+            ),
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const FavoritePage())
+                    );
+                  },
+                  leading: const Icon(
+                    Icons.favorite,
+                    color: Colors.blue,
+                  ),
+                  title: const Text("Favorite"),
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const BookingHistoryPage())
+                    );
+                  },
+                  leading: const Icon(
+                    Icons.history,
+                    color: Colors.blue,
+                  ),
+                  title: const Text("Booking History"),
+                ),
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const OfferPage())
+                    );
+                  },
+                  leading: const Icon(
+                    Icons.notifications,
+                    color: Colors.blue,
+                  ),
+                  title: const Text("Offer"),
+                ),
+              ),
+            ],
           ),
           const SizedBox(width: 10)
         ],

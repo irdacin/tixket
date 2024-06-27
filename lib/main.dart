@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/pages/auth/login_page.dart';
@@ -9,8 +10,10 @@ import 'package:tixket/utils/local_notifications.dart';
 import 'package:tixket/utils/theme.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await LocalNotifications.init();
+  if (!kIsWeb) { // Check if the app is running on the web
+    WidgetsFlutterBinding.ensureInitialized();
+    await LocalNotifications.init();
+  }
 
   runApp(const MyApp());
 }

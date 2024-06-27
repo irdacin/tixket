@@ -7,7 +7,7 @@ class InputField extends StatefulWidget {
   final Widget? trailing;
   final TextEditingController? controller;
   final FormFieldValidator? validator;
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
   final bool isVisible;
   final String? hintText;
   final String? errorText;

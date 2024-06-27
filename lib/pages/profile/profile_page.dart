@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/profile_menu.dart';
 import 'package:tixket/main.dart';
+import 'package:tixket/pages/home/booking_history_page.dart';
 import 'package:tixket/pages/profile/appearance_page.dart';
 import 'package:tixket/pages/auth/login_page.dart';
 import 'package:tixket/pages/profile/account_page.dart';
 import 'package:tixket/pages/profile/notification_page.dart';
-import 'package:tixket/pages/favorite/favorite_page.dart';
+import 'package:tixket/pages/home/favorite_page.dart';
 import 'package:tixket/providers/user_provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -107,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
                     ProfileMenu(
                       onPressed: () { 
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const AppearancePage(),)
+                          MaterialPageRoute(builder: (context) => const AppearancePage())
                         );
                       }, 
                       title: "Appearance", 
@@ -138,7 +139,11 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
                       iconColor: Colors.blueAccent,
                     ),
                     ProfileMenu(
-                      onPressed: () {}, 
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const BookingHistoryPage())
+                        );
+                      }, 
                       title: "History Booking", 
                       icon: Icons.history,
                       iconColor: Colors.blueAccent,

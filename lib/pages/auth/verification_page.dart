@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:tixket/components/loading_button.dart';
 import 'package:tixket/pages/auth/create_new_password_page.dart';
+import 'package:tixket/pages/auth/login_page.dart';
 import 'package:tixket/utils/local_notifications.dart';
 
 class VerificationPage extends StatefulWidget {
@@ -71,8 +72,12 @@ class _VerificationPageState extends State<VerificationPage>  {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const LoginPage()), 
+                (route) => false
+              );
             }, 
+            tooltip: "Close",
             icon: const Icon(Icons.close)
           ),
           const SizedBox(width: 10)

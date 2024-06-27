@@ -11,8 +11,11 @@ class MovieCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.hardEdge,
       color: Theme.of(context).cardColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15)
+        )
       ),
       margin: const EdgeInsets.symmetric(horizontal: 7),
       child: SizedBox(
@@ -33,6 +36,7 @@ class MovieCard extends StatelessWidget {
                     "assets/images/${movie.fileName}",
                     fit: BoxFit.cover,
                     height: 300,
+                    width: MediaQuery.of(context).size.width / 2 - 20,
                   ),
                 ),
               ),

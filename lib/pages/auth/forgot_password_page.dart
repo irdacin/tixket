@@ -27,6 +27,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             onPressed: () {
               Navigator.of(context).pop();
             }, 
+            tooltip: "Close",
             icon: const Icon(Icons.close)
           ),
           const SizedBox(width: 10)
@@ -55,6 +56,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   labelText: "Email",
                   focusNode: focusNodeEmail,
                   icon: Icons.email,
+                  validator: (value) => Validator().generalValidation(value, "Email"),
                   errorText: isErrorTextEmail ? "This email has never been registered" : null,
                 ),
                 const SizedBox(height: 20),
