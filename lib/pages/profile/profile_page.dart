@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/profile_menu.dart';
-import 'package:tixket/main.dart';
 import 'package:tixket/pages/home/booking_history_page.dart';
 import 'package:tixket/pages/profile/appearance_page.dart';
 import 'package:tixket/pages/auth/login_page.dart';
@@ -10,28 +9,8 @@ import 'package:tixket/pages/profile/notification_page.dart';
 import 'package:tixket/pages/home/favorite_page.dart';
 import 'package:tixket/providers/user_provider.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
-
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> with RouteAware {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final route = ModalRoute.of(context);
-    if (route is PageRoute) {
-      routeObserver.subscribe(this, route);
-    }
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,32 +28,29 @@ class _ProfilePageState extends State<ProfilePage> with RouteAware {
               SizedBox(
                 width: 120,
                 height: 120,
-                child: CircleAvatar(
+                child: Provider.of<UserProvider>(context).currentUser!.profilePicture == null 
+                ? CircleAvatar(
                   radius: 25,
                   backgroundColor: Theme.of(context).colorScheme.secondary,
-                  child: currentUser!.profilePicture.isEmpty ? const Icon(
+                  child: const Icon(
                     Icons.person,
                     color: Colors.white,
                     size: 80,
-                  ) : Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      image: DecorationImage(
-                        image: NetworkImage(currentUser!.profilePicture),
-                        fit: BoxFit.cover,
-                      )
-                    ),
                   )
-                ),
+                )
+                : CircleAvatar(
+                  radius: 25,
+                  backgroundImage:MemoryImage(Provider.of<UserProvider>(context).currentUser!.profilePicture!),
+                )
               ),
               const SizedBox(height: 10),
               Text(
-                currentUser!.username,
+                Provider.of<UserProvider>(context).currentUser!.username,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 5),
               Text(
-                currentUser!.email,
+                Provider.of<UserProvider>(context).currentUser!.email,
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               const SizedBox(height: 50),

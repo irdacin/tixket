@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
-import 'package:tixket/pages/profile/account_page.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/utils/update_user_detail.dart';
 import 'package:tixket/utils/validator.dart';
 
 class UpdatePasswordPage extends StatefulWidget {
@@ -115,7 +114,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
               LoadingButton(
                 onPressed: !isCurrentPasswordEmpty && !isCurrentPasswordEmpty && !isConfirmPasswordEmpty ? () {
                   setState(() {
-                    isErrorPassword = !Validator().checkPassword(currentUser!.username, currentPasswordController.text);
+                    isErrorPassword = !Validator().checkPassword(Provider.of<UserProvider>(context, listen: false).currentUser!.username, currentPasswordController.text);
                   });
         
                   if(isErrorPassword) {
@@ -123,12 +122,9 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
                   }
 
                   if(formKey.currentState!.validate()) {
-                    
-                    UpdateUserDetail().updatePassword(currentUser!.username, newPasswordController.text);
+                    Provider.of<UserProvider>(context, listen: false).updatePassword(newPasswordController.text);
                     Navigator.of(context).pop();
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const AccountPage())
-                    );
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -143,7 +139,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
                 } : null, 
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: !isCurrentPasswordEmpty && !isCurrentPasswordEmpty && !isConfirmPasswordEmpty ? Colors.blue : const Color(0xffaaaaaa),
+                  backgroundColor: !isCurrentPasswordEmpty && !isCurrentPasswordEmpty && !isConfirmPasswordEmpty ? Colors.blue : Theme.of(context).colorScheme.secondary,
                   textStyle: Theme.of(context).textTheme.bodyMedium,
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
-import 'package:tixket/pages/profile/account_page.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/utils/update_user_detail.dart';
 import 'package:tixket/utils/validator.dart';
 
 class UpdateEmailPage extends StatefulWidget {
@@ -14,10 +13,18 @@ class UpdateEmailPage extends StatefulWidget {
 }
 
 class _UpdateEmailPageState extends State<UpdateEmailPage> {
-  TextEditingController emailController = TextEditingController(text: currentUser?.email ?? "");
+  TextEditingController emailController = TextEditingController();
   FocusNode focusNodeEmail = FocusNode();
   bool isChanged = false;
   bool isErrorTextEmail = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      emailController.text = Provider.of<UserProvider>(context, listen: false).currentUser!.email;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class _UpdateEmailPageState extends State<UpdateEmailPage> {
               validator: (value) => Validator().validateEmail(value),
               onChanged: (value) {
                 setState(() {
-                  isChanged = value != currentUser!.email;
+                  isChanged = value != Provider.of<UserProvider>(context, listen: false).currentUser!.email;
                   isErrorTextEmail = false;
                 });
               },
@@ -54,11 +61,9 @@ class _UpdateEmailPageState extends State<UpdateEmailPage> {
                   return;
                 }
                 
-                UpdateUserDetail().updateEmail(currentUser!.username, emailController.text);
+                Provider.of<UserProvider>(context, listen: false).updateEmail(emailController.text);
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const AccountPage())
-                );
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -72,7 +77,7 @@ class _UpdateEmailPageState extends State<UpdateEmailPage> {
               } : null, 
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: isChanged && emailController.text.isNotEmpty ? Colors.blue : const Color(0xffaaaaaa),
+                backgroundColor: isChanged && emailController.text.isNotEmpty ? Colors.blue : Theme.of(context).colorScheme.secondary,
                 textStyle: Theme.of(context).textTheme.bodyMedium,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(

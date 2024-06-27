@@ -39,7 +39,6 @@ class NotificationPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 inactiveTrackColor: Theme.of(context).colorScheme.secondary,
-                inactiveThumbColor: Colors.white,
               ),
             ),
             const SizedBox(height: 5),
@@ -53,7 +52,7 @@ class NotificationPage extends StatelessWidget {
               child: Column(
                 children: [
                   SwitchListTile(
-                    value: Provider.of<NotificationProvider>(context).selectedRecomendedNotificationMovies,
+                    value: Provider.of<NotificationProvider>(context).selectedRecommendedNotificationMovies,
                     onChanged: (value) {
                       Provider.of<NotificationProvider>(context, listen: false).changeRecommendedMoviesNotification(value);
                     },
@@ -70,7 +69,6 @@ class NotificationPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                     inactiveTrackColor: Theme.of(context).colorScheme.secondary,
-                    inactiveThumbColor: Colors.white,
                   ),
                   SwitchListTile(
                     value: Provider.of<NotificationProvider>(context).selectedUpdatedMoviesNotification,
@@ -90,7 +88,6 @@ class NotificationPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                     inactiveTrackColor: Theme.of(context).colorScheme.secondary,
-                    inactiveThumbColor: Colors.white,
                   ),
                 ],
               ),

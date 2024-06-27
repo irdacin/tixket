@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
+import 'package:tixket/data/user_data.dart';
 import 'package:tixket/pages/auth/login_page.dart';
-import 'package:tixket/utils/update_user_detail.dart';
 import 'package:tixket/utils/validator.dart';
 
 class CreateNewPasswordPage extends StatefulWidget {
@@ -89,8 +89,15 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                 LoadingButton(
                   onPressed: () {
                     if(formKey.currentState!.validate()) {
-                      UpdateUserDetail().updatePassword(widget.email, passwordController.text);
-
+                      int index = -1;
+                      for(int i = 0; i < users.length; i++) {
+                        if(users[i].username == widget.email) {
+                          index = i;
+                        }
+                      }
+                      if(index == -1) return;
+                      users[index].password = passwordController.text;
+                      
                       showDialog(
                         context: context,
                         barrierDismissible: false,

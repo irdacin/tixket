@@ -1,61 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:tixket/models/user_model.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/utils/update_user_detail.dart';
 
 class NotificationProvider extends ChangeNotifier {
-  bool _selectedAppNotification = currentUser!.notification["Selected App Notification"] ?? true;
-  bool _selectedRecommendedMoviesNotification = currentUser!.notification["Selected Recommended Movies Notification"] ?? true;
-  bool _selectedUpdatedMoviesNotification = currentUser!.notification["Selected Updated Movies Notification"] ?? true; 
+  final UserProvider _userProvider;
 
-  bool get selectedAppNotification => currentUser!.notification["Selected App Notification"] ?? true;
-  bool get selectedRecomendedNotificationMovies => currentUser!.notification["Selected Recommended Movies Notification"] ?? true;
-  bool get selectedUpdatedMoviesNotification => currentUser!.notification["Selected Updated Movies Notification"] ?? true;
+  NotificationProvider(this._userProvider);
+
+  User? get currentUser => _userProvider.currentUser;
+
+  bool get selectedAppNotification => currentUser?.notification?["Selected App Notification"] ?? true;
+  bool get selectedRecommendedNotificationMovies => currentUser?.notification?["Selected Recommended Movies Notification"] ?? true;
+  bool get selectedUpdatedMoviesNotification => currentUser?.notification?["Selected Updated Movies Notification"] ?? true;
 
   void changeAppNotification(bool value) {
-    _selectedAppNotification = value;
-    if(!_selectedAppNotification) {
-      _selectedRecommendedMoviesNotification = false;
-      _selectedUpdatedMoviesNotification = false;
-    }
-    else if(_selectedAppNotification && !_selectedRecommendedMoviesNotification && !_selectedUpdatedMoviesNotification) {
-      _selectedRecommendedMoviesNotification = true;
-      _selectedUpdatedMoviesNotification = true;
+    if (currentUser == null) return;
+
+    currentUser!.notification ??= {};
+    currentUser!.notification = Map<String, bool>.from(currentUser!.notification!);
+    currentUser!.notification!["Selected App Notification"] = value;
+
+    if (!(currentUser!.notification!["Selected App Notification"] ?? true)) {
+      currentUser!.notification!["Selected Recommended Movies Notification"] = false;
+      currentUser!.notification!["Selected Updated Movies Notification"] = false;
+    } else if (currentUser!.notification!["Selected App Notification"]! &&
+        !(currentUser!.notification!["Selected Recommended Movies Notification"] ?? true) &&
+        !(currentUser!.notification!["Selected Updated Movies Notification"] ?? true)) {
+      currentUser!.notification!["Selected Recommended Movies Notification"] = true;
+      currentUser!.notification!["Selected Updated Movies Notification"] = true;
     }
 
-    updateNotification();
+    notifyListeners();
   }
 
   void changeRecommendedMoviesNotification(bool value) {
-    _selectedRecommendedMoviesNotification = value;
-    if(_selectedRecommendedMoviesNotification && !_selectedAppNotification) {
-      _selectedAppNotification = true;
-    }
-    else if(!_selectedRecommendedMoviesNotification && !_selectedUpdatedMoviesNotification) {
-      _selectedAppNotification = false;
+    if (currentUser == null) return;
+
+    currentUser!.notification ??= {};
+    currentUser!.notification = Map<String, bool>.from(currentUser!.notification!);
+    currentUser!.notification!["Selected Recommended Movies Notification"] = value;
+
+    if ((currentUser!.notification!["Selected Recommended Movies Notification"] ?? true) &&
+        !(currentUser!.notification!["Selected App Notification"] ?? true)) {
+      currentUser!.notification!["Selected App Notification"] = true;
+    } else if (!(currentUser!.notification!["Selected Recommended Movies Notification"] ?? true) &&
+        !(currentUser!.notification!["Selected Updated Movies Notification"] ?? true)) {
+      currentUser!.notification!["Selected App Notification"] = false;
     }
 
-    updateNotification();
+    notifyListeners();
   }
 
   void changeUpdateMoviesNotification(bool value) {
-    _selectedUpdatedMoviesNotification = value;
-    if(_selectedUpdatedMoviesNotification && !_selectedAppNotification) {
-      _selectedAppNotification = true;
+    if (currentUser == null) return;
+
+    currentUser!.notification ??= {};
+    currentUser!.notification = Map<String, bool>.from(currentUser!.notification!);
+    currentUser!.notification!["Selected Updated Movies Notification"] = value;
+
+    if ((currentUser!.notification!["Selected Updated Movies Notification"] ?? true) &&
+        !(currentUser!.notification!["Selected App Notification"] ?? true)) {
+      currentUser!.notification!["Selected App Notification"] = true;
+    } else if (!(currentUser!.notification!["Selected Recommended Movies Notification"] ?? true) &&
+        !(currentUser!.notification!["Selected Updated Movies Notification"] ?? true)) {
+      currentUser!.notification!["Selected App Notification"] = false;
     }
-    else if(!_selectedRecommendedMoviesNotification && !_selectedUpdatedMoviesNotification) {
-      _selectedAppNotification = false;
-    }
 
-    updateNotification();
-  }
-
-  void updateNotification() {
-    Map<String, bool> currentNotification = Map.from(currentUser!.notification);
-    currentNotification["Selected App Notification"] = _selectedAppNotification;
-    currentNotification["Selected Recommended Movies Notification"] = _selectedRecommendedMoviesNotification;
-    currentNotification["Selected Updated Movies Notification"] = _selectedUpdatedMoviesNotification;
-
-    UpdateUserDetail().updateNotification(currentUser!.username, currentNotification);
     notifyListeners();
   }
 }

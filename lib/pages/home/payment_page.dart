@@ -33,10 +33,28 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Payment"),
+        title: const Text("Payment"),
       ),
       body: Container(
-
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 200,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/${widget.movie.fileName}"),
+                      fit: BoxFit.cover
+                    ),
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

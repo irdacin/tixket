@@ -8,7 +8,7 @@ class LightTheme {
       onError: Colors.red,
       onPrimaryContainer: Colors.white,
       onPrimaryFixed: Color(0xffd9d9d9),
-      secondary: Color(0xffbebebe),
+      secondary: Color(0xffaaaaaa),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xfff0f0f0),
@@ -65,7 +65,7 @@ class DarkTheme {
       onError: Colors.red,
       onPrimaryContainer: Color(0xff202020),
       onPrimaryFixed: Color(0xff222222),
-      secondary: Color(0xff9e9e9e)
+      secondary: Color(0xff6a6a6a)
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xff121212)

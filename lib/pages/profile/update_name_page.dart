@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
-import 'package:tixket/pages/profile/account_page.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/utils/update_user_detail.dart';
 
 class UpdateNamePage extends StatefulWidget {
   const UpdateNamePage({super.key});
@@ -13,9 +12,17 @@ class UpdateNamePage extends StatefulWidget {
 }
 
 class _UpdateNamePageState extends State<UpdateNamePage> {
-  TextEditingController nameController = TextEditingController(text: currentUser?.name ?? "");
+  TextEditingController nameController = TextEditingController();
   FocusNode focusNodeName = FocusNode();
   bool isChanged = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      nameController.text = Provider.of<UserProvider>(context, listen: false).currentUser!.name;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class _UpdateNamePageState extends State<UpdateNamePage> {
               focusNode: focusNodeName,
               onChanged: (value) {
                 setState(() {
-                  isChanged = value != currentUser!.name;
+                  isChanged = value != Provider.of<UserProvider>(context, listen: false).currentUser!.name;
                 });
               },
               labelText: "Name",
@@ -41,11 +48,9 @@ class _UpdateNamePageState extends State<UpdateNamePage> {
             const SizedBox(height: 40),
             LoadingButton(
               onPressed: isChanged ? () {
-                UpdateUserDetail().updateName(currentUser!.email, nameController.text);
+                Provider.of<UserProvider>(context, listen: false).updateName(nameController.text);
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const AccountPage())
-                );
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -59,7 +64,7 @@ class _UpdateNamePageState extends State<UpdateNamePage> {
               } : null, 
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: isChanged ? Colors.blue : const Color(0xffaaaaaa),
+                backgroundColor: isChanged ? Colors.blue : Theme.of(context).colorScheme.secondary,
                 textStyle: Theme.of(context).textTheme.bodyMedium,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(

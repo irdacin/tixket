@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/components/account_menu.dart';
 import 'package:tixket/pages/auth/login_page.dart';
@@ -23,34 +25,122 @@ class AccountPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              SizedBox(
-                width: 120,
-                height: 120,
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  child: currentUser!.profilePicture.isEmpty ? const Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 80,
-                  ) : Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      image: DecorationImage(
-                        image: AssetImage(currentUser!.profilePicture),
-                        fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context, 
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.all(30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.fromBorderSide(
+                                      BorderSide(color: Theme.of(context).colorScheme.primary)
+                                    ),
+                                    borderRadius: BorderRadius.circular(50)
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () async {
+                                      XFile? pickedFile = await ImagePicker().pickImage(
+                                        source: ImageSource.camera
+                                      );
+                            
+                                      Uint8List newImage = await pickedFile!.readAsBytes();
+                                      Provider.of<UserProvider>(context, listen: false).updateImage(newImage);
+                                      Navigator.of(context).pop();
+                                    },
+                                    icon: const Icon(Icons.camera_alt)
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                const Text("Take Picture")
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.fromBorderSide(
+                                      BorderSide(color: Theme.of(context).colorScheme.primary)
+                                    ),
+                                    borderRadius: BorderRadius.circular(50)
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () async {
+                                      XFile? pickedFile = await ImagePicker().pickImage(
+                                        source: ImageSource.gallery
+                                      );
+                            
+                                      Uint8List newImage = await pickedFile!.readAsBytes();
+                                      Provider.of<UserProvider>(context, listen: false).updateImage(newImage);
+                                      // UpdateUserDetail().updateImage(Provider.of<UserProvider>(context).currentUser!.username, newImage);
+                                      Navigator.of(context).pop();
+                                    },
+                                    icon: const Icon(Icons.image),
+                                  )
+                                ),
+                                const SizedBox(height: 10),
+                                const Text("From Gallery")
+                              ],
+                            ),
+                          ]
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      height: 120,
+                      child: Provider.of<UserProvider>(context).currentUser!.profilePicture == null 
+                      ? CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Theme.of(context).colorScheme.secondary,
+                        child: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 80,
+                        )
+                      )
+                      : CircleAvatar(
+                        radius: 25,
+                        backgroundImage:MemoryImage(Provider.of<UserProvider>(context).currentUser!.profilePicture!),
                       )
                     ),
-                  )
+                    Positioned(
+                      bottom: 0,
+                      right: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Theme.of(context).scaffoldBackgroundColor
+                        ),
+                        padding: const EdgeInsets.all(3),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.blue
+                          ),
+                          padding: const EdgeInsets.all(6),
+                          child: const Icon(
+                            Icons.edit,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        )
+                      )
+                    )
+                  ],
                 ),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {}, 
-                child: Text(
-                  "Change Profile Picture",
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.blue),
-                )
               ),
               const SizedBox(height: 40),
               Container(
@@ -67,7 +157,7 @@ class AccountPage extends StatelessWidget {
                         );
                       }, 
                       title: "Name", 
-                      titleDetail: currentUser?.name ?? ""
+                      titleDetail: Provider.of<UserProvider>(context).currentUser?.name ?? ""
                     ),
                     AccountMenu(
                       onPressed: () {
@@ -76,7 +166,7 @@ class AccountPage extends StatelessWidget {
                         );
                       }, 
                       title: "Username", 
-                      titleDetail: currentUser?.username ?? ""
+                      titleDetail: Provider.of<UserProvider>(context).currentUser?.username ?? ""
                     ),
                     AccountMenu(
                       onPressed: () {
@@ -85,7 +175,7 @@ class AccountPage extends StatelessWidget {
                         );
                       }, 
                       title: "Email", 
-                      titleDetail: currentUser?.email ?? ""
+                      titleDetail: Provider.of<UserProvider>(context).currentUser?.email ?? ""
                     ),
                     AccountMenu(
                       onPressed: () {

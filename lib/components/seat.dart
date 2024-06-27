@@ -6,7 +6,7 @@ class Seat extends StatefulWidget {
   final int row;
   final int col;
   final String seatNumber;
-  final void Function(int row, int col, String seatNumber, SeatState currentState) onSeatStateChanged;
+  final void Function(int row, int col, SeatState currentState) onSeatStateChanged;
 
   const Seat({
     super.key, 
@@ -44,13 +44,13 @@ class _SeatState extends State<Seat> {
           case SeatState.selected: {
             setState(() {
               seatState = SeatState.unselected;
-              widget.onSeatStateChanged(row, col, seatNumber, SeatState.unselected);
+              widget.onSeatStateChanged(row, col, SeatState.unselected);
             });
           } break;
           case SeatState.unselected: {
             setState(() {
               seatState = SeatState.selected;
-              widget.onSeatStateChanged(row, col, seatNumber, SeatState.selected);
+              widget.onSeatStateChanged(row, col, SeatState.selected);
             });
           } break;
           case SeatState.sold:

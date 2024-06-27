@@ -222,17 +222,17 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Date"),
-                SizedBox(height: 5),
+                const Text("Date"),
+                const SizedBox(height: 5),
                 ConstrainedBox(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxWidth: 200,
                   ),
                   child: TextField(
@@ -249,7 +249,7 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                           color: Theme.of(context).colorScheme.primary
                         )
                       ),
-                      prefixIcon: Icon(Icons.calendar_month),
+                      prefixIcon: const Icon(Icons.calendar_month),
                       hintText: "Choose Date"
                     ),
                     onTap: () async {
@@ -283,7 +283,7 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                         pickedDate = selectedDate;
                         isLoading = true;
                       });
-                      await Future.delayed(Duration(seconds: 2), () {
+                      await Future.delayed(const Duration(seconds: 2), () {
                         setState(() {
                           isLoading = false;
                         });
@@ -294,7 +294,7 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           if(pickedDate != null)
             isLoading 
               ? Container(
@@ -358,7 +358,7 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                                       } : null,
                                       child: Container(
                                         width: (MediaQuery.of(context).size.width - 70) / 4 ,
-                                        padding: EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         decoration: isAvailable 
                                           ? BoxDecoration(
                                             border: Border.fromBorderSide(

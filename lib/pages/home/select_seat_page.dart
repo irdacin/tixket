@@ -55,7 +55,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
         indexSelectedTime * 56.0,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     });
@@ -77,7 +77,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,9 +85,9 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                       widget.theater.name,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text("Date: ${DateFormat("dd MMM yyyy").format(widget.selectedDate)}"),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     SizedBox(
                       height: 40, 
                       child: ListView.separated(
@@ -106,7 +106,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                                 isLoading = true;
                               });
 
-                              await Future.delayed(Duration(seconds: 1), () {
+                              await Future.delayed(const Duration(seconds: 1), () {
                                 setState(() {
                                   isLoading = false;
                                   currentSeatsState = widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime].isEmpty 
@@ -120,7 +120,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                             labelStyle: TextStyle(
                               color: indexSelectedTime == index || !isAvailable ? Colors.white : null
                             ),
-                            side: !isAvailable ? BorderSide(
+                            side: !isAvailable ? const BorderSide(
                               color: Colors.transparent
                             ) : null, 
                             selected: indexSelectedTime == index,
@@ -134,7 +134,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -150,9 +150,9 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                       )
                     )
                   ),
-                  SizedBox(width: 10),
-                  Text("Available"),
-                  SizedBox(width: 50),
+                  const SizedBox(width: 10),
+                  const Text("Available"),
+                  const SizedBox(width: 50),
                   Container(
                     height: 20,
                     width: 20,
@@ -161,16 +161,16 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                       color: Colors.red
                     )
                   ),
-                  SizedBox(width: 10),
-                  Text("Taken"),
+                  const SizedBox(width: 10),
+                  const Text("Taken"),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               isLoading ? Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   color: Colors.blue,
                 )
               ) : 
@@ -181,7 +181,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                     cols: widget.theater.sampleSeatsState.first.length,
                     currentSeatsState: currentSeatsState
                   ), 
-                  onSeatStateChanged: (row, col, currentSeatNumber, currentState) {
+                  onSeatStateChanged: (row, col, currentState) {
                     setState(() {
                       if (currentState == SeatState.selected) {
                         selectedSeats.add(Pair<int, int>(row, col));
@@ -199,8 +199,8 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
-              if(!isLoading) Divider(thickness: 2),
-              SizedBox(height: 100)
+              if(!isLoading) const Divider(thickness: 2),
+              const SizedBox(height: 100)
             ],
           ),
           Positioned(
@@ -210,13 +210,13 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
             child: Container(
               height: 80,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
                 color: Theme.of(context).colorScheme.onPrimaryFixed,
               ),
-              padding: EdgeInsets.only(top: 15, left: 20),
+              padding: const EdgeInsets.only(top: 15, left: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -229,7 +229,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                         "Subtotal",
                         style: Theme.of(context).textTheme.displaySmall,
                       ) ,
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     NumberFormat.currency(
                       locale: 'id',
@@ -270,9 +270,9 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                 foregroundColor: Colors.white,
                 backgroundColor: selectedSeats.isEmpty ? Theme.of(context).colorScheme.secondary : Colors.blue,
                 textStyle: Theme.of(context).textTheme.headlineMedium,
-                padding: EdgeInsets.all(20),
-                minimumSize: Size(200, 0),
-                shape: RoundedRectangleBorder(
+                padding: const EdgeInsets.all(20),
+                minimumSize: const Size(200, 0),
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tixket/components/input_field.dart';
 import 'package:tixket/components/loading_button.dart';
-import 'package:tixket/pages/profile/account_page.dart';
 import 'package:tixket/providers/user_provider.dart';
-import 'package:tixket/utils/update_user_detail.dart';
 import 'package:tixket/utils/validator.dart';
 
 class UpdateUsernamePage extends StatefulWidget {
@@ -14,10 +13,18 @@ class UpdateUsernamePage extends StatefulWidget {
 }
 
 class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
-  TextEditingController usernameController = TextEditingController(text: currentUser?.username ?? "");
+  TextEditingController usernameController = TextEditingController();
   FocusNode focusNodeUsername = FocusNode();
   bool isChanged = false;
   bool isErrorTextUsername = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      usernameController.text = Provider.of<UserProvider>(context, listen: false).currentUser!.username;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
               validator: (value) => Validator().validateUsername(value),
               onChanged: (value) {
                 setState(() {
-                  isChanged = value != currentUser!.username;
+                  isChanged = value != Provider.of<UserProvider>(context, listen: false).currentUser!.username;
                   isErrorTextUsername = false;
                 });
               },
@@ -54,11 +61,9 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
                   return;
                 }
                 
-                UpdateUserDetail().updateUsername(currentUser!.email, usernameController.text);
+                Provider.of<UserProvider>(context, listen: false).updateUsername(usernameController.text);
                 Navigator.of(context).pop();
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const AccountPage())
-                );
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -72,7 +77,7 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
               } : null, 
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: isChanged && usernameController.text.isNotEmpty ? Colors.blue : const Color(0xffaaaaaa),
+                backgroundColor: isChanged && usernameController.text.isNotEmpty ? Colors.blue : Theme.of(context).colorScheme.secondary,
                 textStyle: Theme.of(context).textTheme.bodyMedium,
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(

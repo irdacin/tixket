@@ -18,8 +18,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -29,14 +27,16 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ChangeNotifierProvider(create: (context) => NotificationProvider()),
+        ChangeNotifierProxyProvider<UserProvider, NotificationProvider>(
+          create: (context) => NotificationProvider(Provider.of<UserProvider>(context, listen: false)),
+          update: (context, userProvider, notificationProvider) => NotificationProvider(userProvider),
+        ),
         ChangeNotifierProvider(create: (context) => FavoriteMovieProvider()),
       ],
       builder: (context, child) {
         return MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          navigatorObservers: [routeObserver],
           theme: LightTheme().theme,
           darkTheme: DarkTheme().theme,
           themeMode: Provider.of<ThemeProvider>(context).themeMode,

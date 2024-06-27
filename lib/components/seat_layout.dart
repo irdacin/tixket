@@ -5,7 +5,7 @@ import 'package:tixket/utils/seat_state.dart';
 
 class SeatLayout extends StatelessWidget {
   final SeatLayoutState seatLayoutState;
-  final void Function(int row, int col, String currentSeatNumber, SeatState currentState) onSeatStateChanged;
+  final void Function(int row, int col, SeatState currentState) onSeatStateChanged;
 
   const SeatLayout({
     super.key, 
