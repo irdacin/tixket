@@ -300,7 +300,6 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
               ? Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
-                // height: MediaQuery.of(context).size.height,
                 child: const CircularProgressIndicator(
                   color: Colors.blue,
                 )

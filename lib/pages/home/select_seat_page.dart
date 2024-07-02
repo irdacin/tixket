@@ -49,7 +49,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
 
     currentSeatsState = widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime].isEmpty 
       ? widget.theater.newSeatsState[indexSelectedTime].map((row) => List<SeatState>.from(row)).toList()
-      : widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime];
+      : widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime].map((row) => List<SeatState>.from(row)).toList();
     
     _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -222,7 +222,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                 children: [
                   selectedSeats.isNotEmpty
                     ? Text(
-                        "Subtotal (${selectedSeats.length} ticket)",
+                        "Subtotal (${selectedSeats.length} tickets)",
                         style: Theme.of(context).textTheme.displaySmall,
                       ) 
                     : Text(
@@ -264,7 +264,6 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                     indexSelectedTime: indexSelectedTime,
                   ))
                 );
-                // widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime] = currentSeatsState;
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,

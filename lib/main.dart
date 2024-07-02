@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tixket/pages/auth/login_page.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 import 'package:tixket/providers/notification_provider.dart';
+import 'package:tixket/providers/payment_method_provider.dart';
 import 'package:tixket/providers/theme_provider.dart';
 import 'package:tixket/providers/user_provider.dart';
 import 'package:tixket/utils/local_notifications.dart';
@@ -32,6 +33,10 @@ class MyApp extends StatelessWidget {
           update: (context, userProvider, notificationProvider) => NotificationProvider(userProvider),
         ),
         ChangeNotifierProvider(create: (context) => FavoriteMovieProvider()),
+        ChangeNotifierProxyProvider<UserProvider, PaymentMethodProvider>(
+          create: (context) => PaymentMethodProvider(Provider.of<UserProvider>(context, listen: false)),
+          update: (context, userProvider, paymentMethodProvider) => PaymentMethodProvider(userProvider),
+        ),
       ],
       builder: (context, child) {
         return MaterialApp(

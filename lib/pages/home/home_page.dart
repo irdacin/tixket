@@ -9,13 +9,13 @@ import 'package:tixket/pages/home/search_page.dart';
 import 'package:tixket/pages/home/view_all_page.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final List<Movie> playingNowMovies = movies.where((element) => element.type == "Playing Now").toList();
-  final List<Movie> comingSoonMovies = movies.where((element) => element.type == "Coming Soon").toList();
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<Movie> playingNowMovies = movies.where((element) => element.type == "Playing Now").toList();
+    final List<Movie> comingSoonMovies = movies.where((element) => element.type == "Coming Soon").toList();
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,7 +52,10 @@ class HomePage extends StatelessWidget {
                     Icons.favorite,
                     color: Colors.blue,
                   ),
-                  title: const Text("Favorite"),
+                  title: Text(
+                    "Favorite",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
               ),
               PopupMenuItem(
@@ -66,7 +69,10 @@ class HomePage extends StatelessWidget {
                     Icons.history,
                     color: Colors.blue,
                   ),
-                  title: const Text("Booking History"),
+                  title: Text(
+                    "Booking History",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
               ),
               PopupMenuItem(
@@ -80,7 +86,10 @@ class HomePage extends StatelessWidget {
                     Icons.notifications,
                     color: Colors.blue,
                   ),
-                  title: const Text("Offer"),
+                  title: Text(
+                    "Offer",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
               ),
             ],

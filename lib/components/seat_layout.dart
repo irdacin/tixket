@@ -24,12 +24,10 @@ class SeatLayout extends StatelessWidget {
         child: Column(
           children: [
             ...List<int>.generate(seatLayoutState.rows, (row) => row)
-              .map((row) {
-                return Row(
+              .map((row) => Row(
                   children: [
                     ...List<int>.generate(seatLayoutState.cols, (col) => col)
-                      .map((col) {
-                        return Padding(
+                      .map((col) => Padding(
                           padding: const EdgeInsets.all(3),
                           child: Seat(
                             seatState: seatLayoutState.currentSeatsState[row][col], 
@@ -38,12 +36,10 @@ class SeatLayout extends StatelessWidget {
                             seatNumber: "${String.fromCharCode(row + 65)}${col + 1}",
                             onSeatStateChanged: onSeatStateChanged
                           ),
-                        );
-                      },
+                        ),
                     )
                   ],
-                );
-              }
+                )
             ),
           ],
         ),

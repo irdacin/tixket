@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:tixket/models/payment_method_model.dart';
 
 class User {
   String username;
@@ -7,6 +8,7 @@ class User {
   String password;
   Uint8List? profilePicture;
   Map<String, bool>? notification;
+  PaymentMethod? paymentMethod;
 
   User({
     required this.username,

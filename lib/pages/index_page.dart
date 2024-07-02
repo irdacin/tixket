@@ -14,7 +14,7 @@ class _IndexPageState extends State<IndexPage> {
   int _currentIndex = 0;
 
   final List<Widget> pages = [
-    HomePage(),
+    const HomePage(),
     const FavoritePage(),
     const ProfilePage(),
   ];
