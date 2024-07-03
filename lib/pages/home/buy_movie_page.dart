@@ -87,65 +87,151 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                             children: [
                               Column(
                                 children: [
-                                  const CircleAvatar(
-                                    child: Icon(Icons.link),
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: Icon(
+                                      Icons.link_outlined,
+                                      color: Colors.blue,
+                                      size: 30,
+                                    ),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
                                     "Copy Link",
-                                    style: Theme.of(context).textTheme.bodySmall,
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
                                   )
                                 ],
                               ),
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  const CircleAvatar(
-                                    child: Icon(Icons.abc_outlined),
+                                  SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                      "assets/images/whatsapp.png"
+                                    )
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    "Whatsapp",
-                                    style: Theme.of(context).textTheme.bodySmall,
+                                    "WhatsApp",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
                                   )
                                 ],
                               ),
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  const CircleAvatar(
-                                    child: Icon(Icons.abc_outlined),
+                                  SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                      "assets/images/telegram.png",
+                                    )
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    "Whatsapp",
-                                    style: Theme.of(context).textTheme.bodySmall,
+                                    "Telegram",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
                                   )
                                 ],
                               ),
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  const CircleAvatar(
-                                    child: Icon(Icons.abc_outlined),
+                                  SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.asset(
+                                      "assets/images/instagram.png"
+                                    )
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    "Whatsapp",
-                                    style: Theme.of(context).textTheme.bodySmall,
+                                    "Instagram",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
                                   )
                                 ],
                               ),
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  const CircleAvatar(
-                                    child: Icon(Icons.abc_outlined),
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: Icon(
+                                      Icons.message,
+                                      color: Colors.blue,
+                                      size: 30,
+                                    ),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    "Whatsapp",
-                                    style: Theme.of(context).textTheme.bodySmall,
+                                    "SMS",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: Icon(
+                                      Icons.email_outlined,
+                                      color: Colors.blue,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Email",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: Icon(
+                                      Icons.more_vert,
+                                      color: Colors.blue,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Other",
+                                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: 12),
                                   )
                                 ],
                               ),
