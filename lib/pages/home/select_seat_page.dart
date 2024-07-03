@@ -111,7 +111,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                                   isLoading = false;
                                   currentSeatsState = widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime].isEmpty 
                                     ? widget.theater.newSeatsState[indexSelectedTime].map((row) => List<SeatState>.from(row)).toList()
-                                    : widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime];
+                                    : widget.theater.currentSeatsState[widget.movie]![widget.selectedDate]![indexSelectedTime].map((row) => List<SeatState>.from(row)).toList();
                                   selectedSeats.clear();
                                 });
                               });
