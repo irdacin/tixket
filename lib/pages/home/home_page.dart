@@ -40,13 +40,14 @@ class HomePage extends StatelessWidget {
               Icons.more_vert,
               size: 28,
             ),
-            offset: Offset(0, 50),
+            offset: const Offset(0, 50),
             elevation: 20,
             shadowColor: Theme.of(context).colorScheme.secondary,
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const FavoritePage())
                     );
@@ -64,6 +65,7 @@ class HomePage extends StatelessWidget {
               PopupMenuItem(
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const BookingHistoryPage())
                     );
@@ -81,6 +83,7 @@ class HomePage extends StatelessWidget {
               PopupMenuItem(
                 child: ListTile(
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const OfferPage())
                     );
@@ -104,7 +107,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -138,7 +141,7 @@ class HomePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: (index == 0) ? const EdgeInsets.only(left: 5) : (index == playingNowMovies.length - 1) ? const EdgeInsets.only(right: 5) : null,
+                    padding: (index == 0) ? const EdgeInsets.only(left: 10) : (index == playingNowMovies.length - 1) ? const EdgeInsets.only(right: 10) : null,
                     child: MovieCard(movie: playingNowMovies[index]),
                   );
                 },
@@ -146,7 +149,7 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -181,7 +184,7 @@ class HomePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: (index == 0) ? const EdgeInsets.only(left: 5) : (index == comingSoonMovies.length - 1) ? const EdgeInsets.only(right: 5) : null,
+                    padding: (index == 0) ? const EdgeInsets.only(left: 10) : (index == comingSoonMovies.length - 1) ? const EdgeInsets.only(right: 10) : null,
                     child: MovieCard(movie: comingSoonMovies[index])
                   );
                 },

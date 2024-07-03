@@ -33,10 +33,13 @@ class MyApp extends StatelessWidget {
           create: (context) => NotificationProvider(Provider.of<UserProvider>(context, listen: false)),
           update: (context, userProvider, notificationProvider) => NotificationProvider(userProvider),
         ),
-        ChangeNotifierProvider(create: (context) => FavoriteMovieProvider()),
         ChangeNotifierProxyProvider<UserProvider, PaymentMethodProvider>(
           create: (context) => PaymentMethodProvider(Provider.of<UserProvider>(context, listen: false)),
           update: (context, userProvider, paymentMethodProvider) => PaymentMethodProvider(userProvider),
+        ),
+        ChangeNotifierProxyProvider<UserProvider, FavoriteMovieProvider>(
+          create: (context) => FavoriteMovieProvider(Provider.of<UserProvider>(context, listen: false)),
+          update: (context, userProvider, favoriteMovieProvider) => FavoriteMovieProvider(userProvider),
         ),
         ChangeNotifierProxyProvider<UserProvider, BookingHistoryProvider>(
           create: (context) => BookingHistoryProvider(Provider.of<UserProvider>(context, listen: false)),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/models/payment_method_model.dart';
 import 'package:tixket/models/ticket_model.dart';
 
@@ -10,6 +11,7 @@ class User {
   Uint8List? profilePicture;
   Map<String, bool>? notification;
   PaymentMethod? paymentMethod;
+  List<Movie>? favoriteMovie;
   List<Ticket>? bookingHistoryMovie;
 
   User({
@@ -20,6 +22,7 @@ class User {
     this.profilePicture,
     this.notification,
     this.paymentMethod,
+    this.favoriteMovie,
     this.bookingHistoryMovie
   });
 

@@ -6,7 +6,6 @@ import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/models/theater_model.dart';
 import 'package:tixket/pages/home/payment_methods_page.dart';
 import 'package:tixket/pages/home/payment_success_page.dart';
-import 'package:tixket/providers/booking_history_provider.dart';
 import 'package:tixket/providers/payment_method_provider.dart';
 import 'package:tixket/utils/seat_state.dart';
 

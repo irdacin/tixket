@@ -7,7 +7,7 @@ class OfferPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Offer"),
+        title: const Text("Offer"),
       ),
       body: Container(
       ),
