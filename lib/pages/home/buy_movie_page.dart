@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/data/theater_data.dart';
@@ -96,10 +97,10 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                                         color: Colors.blue
                                       )
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.link_outlined,
                                       color: Colors.blue,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ),
                                   const SizedBox(height: 5),
@@ -112,12 +113,20 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  SizedBox(
+                                  Container(
                                     width: 50,
                                     height: 50,
-                                    child: Image.asset(
-                                      "assets/images/whatsapp.png"
-                                    )
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: const Icon(
+                                      FontAwesomeIcons.whatsapp,
+                                      color: Colors.blue,
+                                      size: 25,
+                                    ),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
@@ -129,12 +138,20 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  SizedBox(
+                                  Container(
                                     width: 50,
                                     height: 50,
-                                    child: Image.asset(
-                                      "assets/images/telegram.png",
-                                    )
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: const Icon(
+                                      FontAwesomeIcons.telegram,
+                                      color: Colors.blue,
+                                      size: 25,
+                                    ),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
@@ -146,12 +163,20 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                               const SizedBox(width: 20),
                               Column(
                                 children: [
-                                  SizedBox(
+                                  Container(
                                     width: 50,
                                     height: 50,
-                                    child: Image.asset(
-                                      "assets/images/instagram.png"
-                                    )
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.blue
+                                      )
+                                    ),
+                                    child: const Icon(
+                                      FontAwesomeIcons.instagram,
+                                      color: Colors.blue,
+                                      size: 25,
+                                    ),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
@@ -172,10 +197,10 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                                         color: Colors.blue
                                       )
                                     ),
-                                    child: Icon(
-                                      Icons.message,
+                                    child: const Icon(
+                                      FontAwesomeIcons.commentSms,
                                       color: Colors.blue,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ),
                                   const SizedBox(height: 5),
@@ -197,10 +222,10 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                                         color: Colors.blue
                                       )
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.email_outlined,
                                       color: Colors.blue,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ),
                                   const SizedBox(height: 5),
@@ -222,10 +247,10 @@ class _BuyMoviePageState extends State<BuyMoviePage> {
                                         color: Colors.blue
                                       )
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.more_vert,
                                       color: Colors.blue,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ),
                                   const SizedBox(height: 5),
