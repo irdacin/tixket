@@ -40,6 +40,9 @@ class HomePage extends StatelessWidget {
               Icons.more_vert,
               size: 28,
             ),
+            offset: Offset(0, 50),
+            elevation: 20,
+            shadowColor: Theme.of(context).colorScheme.secondary,
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
                 child: ListTile(

@@ -14,8 +14,6 @@ class NotificationProvider extends ChangeNotifier {
   bool get selectedUpdatedMoviesNotification => currentUser?.notification?["Selected Updated Movies Notification"] ?? true;
 
   void changeAppNotification(bool value) {
-    if (currentUser == null) return;
-
     currentUser!.notification ??= {};
     currentUser!.notification = Map<String, bool>.from(currentUser!.notification!);
     currentUser!.notification!["Selected App Notification"] = value;
@@ -34,8 +32,6 @@ class NotificationProvider extends ChangeNotifier {
   }
 
   void changeRecommendedMoviesNotification(bool value) {
-    if (currentUser == null) return;
-
     currentUser!.notification ??= {};
     currentUser!.notification = Map<String, bool>.from(currentUser!.notification!);
     currentUser!.notification!["Selected Recommended Movies Notification"] = value;
@@ -52,8 +48,6 @@ class NotificationProvider extends ChangeNotifier {
   }
 
   void changeUpdateMoviesNotification(bool value) {
-    if (currentUser == null) return;
-
     currentUser!.notification ??= {};
     currentUser!.notification = Map<String, bool>.from(currentUser!.notification!);
     currentUser!.notification!["Selected Updated Movies Notification"] = value;

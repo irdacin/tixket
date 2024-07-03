@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pair/pair.dart';
+import 'package:provider/provider.dart';
 import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/models/theater_model.dart';
+import 'package:tixket/models/ticket_model.dart';
 import 'package:tixket/pages/home/ticket_page.dart';
 import 'package:tixket/pages/index_page.dart';
+import 'package:tixket/providers/booking_history_provider.dart';
 import 'package:tixket/utils/get_booking_code.dart';
 
 class PaymentSuccessPage extends StatelessWidget {
@@ -25,6 +28,18 @@ class PaymentSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String bookingCode = getBookingCode();
+    
+    Ticket ticket = Ticket(
+      movie: movie, 
+      theater: theater, 
+      selectedDate: selectedDate, 
+      selectedTime: selectedTime, 
+      selectedSeats: selectedSeats, 
+      bookingCode: bookingCode
+    );
+
+    Provider.of<BookingHistoryProvider>(context, listen: false).addTicket(ticket);
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -59,14 +74,7 @@ class PaymentSuccessPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TicketPage(
-                        movie: movie,
-                        theater: theater,
-                        selectedDate: selectedDate,
-                        selectedTime: selectedTime,
-                        selectedSeats: selectedSeats,
-                        bookingCode: bookingCode
-                      ))
+                      MaterialPageRoute(builder: (context) => TicketPage(ticket: ticket))
                     );
                   },
                   style: ElevatedButton.styleFrom(

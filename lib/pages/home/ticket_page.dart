@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pair/pair.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:tixket/models/movie_model.dart';
-import 'package:tixket/models/theater_model.dart';
+import 'package:tixket/models/ticket_model.dart';
 import 'package:tixket/pages/index_page.dart';
 
 class TicketPage extends StatelessWidget {
-  final Movie movie;
-  final Theater theater;
-  final DateTime selectedDate;
-  final TimeOfDay selectedTime;
-  final Set<Pair<int,int>> selectedSeats;
-  final String bookingCode;
+  final Ticket ticket;
 
   const TicketPage({
     super.key, 
-    required this.movie, 
-    required this.theater, 
-    required this.selectedDate, 
-    required this.selectedTime, 
-    required this.selectedSeats, 
-    required this.bookingCode
+    required this.ticket
   });
 
   @override
@@ -80,7 +68,7 @@ class TicketPage extends StatelessWidget {
                         height: 100,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("assets/images/${movie.fileName}"),
+                            image: AssetImage("assets/images/${ticket.movie.fileName}"),
                             fit: BoxFit.cover
                           )
                         ),
@@ -88,7 +76,7 @@ class TicketPage extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          movie.title,
+                          ticket.movie.title,
                           style: Theme.of(context).textTheme.headlineMedium,
                         )
                       )
@@ -108,7 +96,7 @@ class TicketPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
                         Text(
-                          bookingCode,
+                          ticket.bookingCode,
                           style: Theme.of(context).textTheme.headlineMedium,
                         )
                       ],
@@ -117,7 +105,7 @@ class TicketPage extends StatelessWidget {
                     Container(
                       color: Colors.white,
                       child: QrImageView(
-                        data: bookingCode
+                        data: ticket.bookingCode
                       ),
                     )
                   ],
@@ -136,7 +124,7 @@ class TicketPage extends StatelessWidget {
                           child: const Text("Theater")
                         ),
                         Expanded(
-                          child: Text(theater.name)
+                          child: Text(ticket.theater.name)
                         )
                       ],
                     ),
@@ -149,7 +137,7 @@ class TicketPage extends StatelessWidget {
                           child: const Text("Location")
                         ),
                         Expanded(
-                          child: Text(theater.location)
+                          child: Text(ticket.theater.location)
                         )
                       ],
                     ),
@@ -162,7 +150,7 @@ class TicketPage extends StatelessWidget {
                           child: const Text("Date")
                         ),
                         Expanded(
-                          child: Text(DateFormat("EEEE, d MMMM yyyy").format(selectedDate))
+                          child: Text(DateFormat("EEEE, d MMMM yyyy").format(ticket.selectedDate))
                         )
                       ],
                     ),
@@ -175,7 +163,7 @@ class TicketPage extends StatelessWidget {
                           child: const Text("Time")
                         ),
                         Expanded(
-                          child: Text("${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}")
+                          child: Text("${ticket.selectedTime.hour.toString().padLeft(2, '0')}:${ticket.selectedTime.minute.toString().padLeft(2, '0')}")
                         )
                       ],
                     ),
@@ -189,7 +177,7 @@ class TicketPage extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            selectedSeats.map((seat) {
+                            ticket.selectedSeats.map((seat) {
                               var (row, col) = seat();
                               return "${String.fromCharCode(row + 65)}${col + 1}";
                             }).join(", ").toString(),
@@ -204,8 +192,7 @@ class TicketPage extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => const IndexPage()),
                           (route) => false,
                         );
-                      }, 
-                      child: const Text("OK"),
+                      },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.blue,
@@ -214,7 +201,8 @@ class TicketPage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)
                         )
-                      ),
+                      ), 
+                      child: const Text("OK"),
                     ),
                   ],
                 ),

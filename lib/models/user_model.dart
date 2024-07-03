@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:tixket/models/payment_method_model.dart';
+import 'package:tixket/models/ticket_model.dart';
 
 class User {
   String username;
@@ -9,6 +10,7 @@ class User {
   Uint8List? profilePicture;
   Map<String, bool>? notification;
   PaymentMethod? paymentMethod;
+  List<Ticket>? bookingHistoryMovie;
 
   User({
     required this.username,
@@ -16,7 +18,9 @@ class User {
     required this.email,
     this.name = "",
     this.profilePicture,
-    this.notification
+    this.notification,
+    this.paymentMethod,
+    this.bookingHistoryMovie
   });
 
   @override

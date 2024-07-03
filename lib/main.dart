@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/pages/auth/login_page.dart';
+import 'package:tixket/providers/booking_history_provider.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 import 'package:tixket/providers/notification_provider.dart';
 import 'package:tixket/providers/payment_method_provider.dart';
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<UserProvider, PaymentMethodProvider>(
           create: (context) => PaymentMethodProvider(Provider.of<UserProvider>(context, listen: false)),
           update: (context, userProvider, paymentMethodProvider) => PaymentMethodProvider(userProvider),
+        ),
+        ChangeNotifierProxyProvider<UserProvider, BookingHistoryProvider>(
+          create: (context) => BookingHistoryProvider(Provider.of<UserProvider>(context, listen: false)),
+          update: (context, userProvider, bookingHistoryProvider) => BookingHistoryProvider(userProvider),
         ),
       ],
       builder: (context, child) {
