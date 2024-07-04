@@ -5,7 +5,7 @@ import 'package:tixket/components/seat_layout.dart';
 import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/models/seat_layout_state_model.dart';
 import 'package:tixket/models/theater_model.dart';
-import 'package:tixket/pages/home/payment_page.dart';
+import 'package:tixket/pages/movie/payment_page.dart';
 import 'package:tixket/utils/seat_state.dart';
 
 class SelectSeatPage extends StatefulWidget {
@@ -169,7 +169,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
               isLoading ? Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height * 0.5,
                 child: const CircularProgressIndicator(
                   color: Colors.blue,
                 )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/models/movie_model.dart';
-import 'package:tixket/pages/home/movie_detail_page.dart';
+import 'package:tixket/pages/movie/movie_detail_page.dart';
 import 'package:tixket/pages/index_page.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 

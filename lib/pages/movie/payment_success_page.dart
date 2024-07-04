@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tixket/models/movie_model.dart';
 import 'package:tixket/models/theater_model.dart';
 import 'package:tixket/models/ticket_model.dart';
-import 'package:tixket/pages/home/ticket_page.dart';
+import 'package:tixket/pages/movie/ticket_page.dart';
 import 'package:tixket/pages/index_page.dart';
 import 'package:tixket/providers/booking_history_provider.dart';
 import 'package:tixket/utils/get_booking_code.dart';

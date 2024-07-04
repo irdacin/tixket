@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tixket/pages/home/home_page.dart';
 import 'package:tixket/pages/profile/profile_page.dart';
-import 'package:tixket/pages/home/favorite_page.dart';
+import 'package:tixket/pages/theater/theater_page.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({super.key});
@@ -15,7 +16,7 @@ class _IndexPageState extends State<IndexPage> {
 
   final List<Widget> pages = [
     const HomePage(),
-    const FavoritePage(),
+    const TheaterPage(),
     const ProfilePage(),
   ];
 
@@ -26,18 +27,14 @@ class _IndexPageState extends State<IndexPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue,
-        unselectedItemColor: const Color(0xff6e6e6e),
-        type: BottomNavigationBarType.fixed,
-        unselectedFontSize: 12,
-        selectedFontSize: 12,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home"
           ),
           BottomNavigationBarItem(
-            icon: Icon(IconData(0xe25a, fontFamily: 'MaterialIcons')),
-            label: "F&B"
+            icon: Icon(FontAwesomeIcons.table),
+            label: "Theater"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

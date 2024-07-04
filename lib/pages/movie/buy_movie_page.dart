@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:tixket/components/read_more_text.dart';
+import 'package:tixket/data/theater_data.dart';
 import 'package:tixket/models/movie_model.dart';
-import 'package:tixket/pages/home/buy_movie_page.dart';
+import 'package:tixket/pages/movie/select_seat_page.dart';
+import 'package:tixket/pages/theater/theater_detail_page.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 
-class MovieDetailPage extends StatelessWidget {
+class BuyMoviePage extends StatefulWidget {
   final Movie movie;
 
-  const MovieDetailPage({
+  const BuyMoviePage({
     super.key, 
     required this.movie
   });
 
   @override
+  State<BuyMoviePage> createState() => _BuyMoviePageState();
+}
+
+class _BuyMoviePageState extends State<BuyMoviePage> {
+  TextEditingController datePickerController = TextEditingController();
+  DateTime? pickedDate;
+  bool isLoading = false;
+  
+  @override
   Widget build(BuildContext context) {
-    bool isFavorite = Provider.of<FavoriteMovieProvider>(context).favoriteMovie.any((element) => element == movie);
+    bool isFavorite = Provider.of<FavoriteMovieProvider>(context).favoriteMovie.any((element) => element == widget.movie);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -54,16 +65,16 @@ class MovieDetailPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          movie.title,
+                          widget.movie.title,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 10),
                         Container(
                           width: 100,
-                          height: 120,
+                          height: 100,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/${movie.fileName}"),
+                              image: AssetImage("assets/images/${widget.movie.fileName}"),
                               fit: BoxFit.cover
                             ),
                             borderRadius: BorderRadius.circular(20)
@@ -268,176 +279,235 @@ class MovieDetailPage extends StatelessWidget {
           const SizedBox(width: 10)
         ],
       ),
-      body: Stack(
+      body: Column(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/2.5,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                  image: AssetImage("assets/images/${movie.fileName}"),
-                  fit: BoxFit.cover,
-                  opacity: 0.6
-                ),
-              ),
-              child: Hero(
-                tag: movie.title,
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        child: Text(
-                          movie.title,
-                          style: Theme.of(context).textTheme.headlineMedium!.apply(color: Colors.white),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
-                          borderRadius: const BorderRadius.all(Radius.circular(50)),
-                        ),
-                        child: IconButton(
-                          onPressed: (){
-                            if(!isFavorite) {
-                              Provider.of<FavoriteMovieProvider>(context, listen: false).addMovie(movie);
-                            } else {
-                              Provider.of<FavoriteMovieProvider>(context, listen: false).removeMovie(movie);
-                            }
-                          },
-                          tooltip: !isFavorite ? "Add to favorite" : "Remove to favorite",
-                          icon: Icon( 
-                            isFavorite ? Icons.favorite : Icons.favorite_outline,
-                            color: isFavorite ? Colors.red : null,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height/4.5,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              image: DecorationImage(
+                image: AssetImage("assets/images/${widget.movie.fileName}"),
+                fit: BoxFit.cover,
+                opacity: 0.6
               ),
             ),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).size.height/2.5,
-            left: 0,
-            right: 0,
-            bottom: 50,
-            child: SingleChildScrollView(
+            child: Hero(
+              tag: widget.movie.title,
               child: Container(
                 padding: const EdgeInsets.all(15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    ReadMoreText(
-                      movie.sinopsis,
-                      textAlign: TextAlign.justify,
-                      textStyle: Theme.of(context).textTheme.bodySmall,
-                      trimLines: 4,
-                      textTrimStyle: Theme.of(context).textTheme.displayLarge?.apply(color: Colors.blue),
-                      trimCollapsedText: "READ SYNOPSIS",
-                      trimExpandedText: "HIDE",
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: Text(
+                        widget.movie.title,
+                        style: Theme.of(context).textTheme.headlineMedium!.apply(color: Colors.white),
+                      ),
                     ),
-                    const SizedBox(height: 30),
-                    Text(
-                      "Producer:",
-                      style: Theme.of(context).textTheme.headlineSmall,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: IconButton(
+                        onPressed: (){
+                          if(!isFavorite) {
+                            Provider.of<FavoriteMovieProvider>(context, listen: false).addMovie(widget.movie);
+                          } else {
+                            Provider.of<FavoriteMovieProvider>(context, listen: false).removeMovie(widget.movie);
+                          }
+                        },
+                        tooltip: !isFavorite ? "Add to favorite" : "Remove from favorite",
+                        icon: Icon( 
+                          isFavorite ? Icons.favorite : Icons.favorite_outline,
+                          color: isFavorite ? Colors.red : null,
+                          size: 30,
+                        ),
+                      ),
                     ),
-                    Text(
-                      movie.producer,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Director:",
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      movie.director,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Writer:",
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      movie.writer,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Cast:",
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      movie.cast,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Distributor:",
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Text(
-                      movie.distributor,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: ElevatedButton(
-                onPressed: () {
-                  if(movie.type == "Coming Soon") return;
-              
-                  Navigator.of(context).push(
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => BuyMoviePage(movie: movie),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        const begin = Offset(0.0, 1.0);
-                        const end = Offset.zero;
-                        const curve = Curves.ease;
-              
-                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              
-                        return SlideTransition(
-                          position: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                    )
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: movie.type == "Playing Now" ? Colors.blue : Theme.of(context).colorScheme.secondary,
-                  textStyle: Theme.of(context).textTheme.headlineMedium,
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                  )
+          const SizedBox(height: 10),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Date"),
+                const SizedBox(height: 5),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 200,
+                  ),
+                  child: TextField(
+                    controller: datePickerController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary
+                        )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary
+                        )
+                      ),
+                      prefixIcon: const Icon(Icons.calendar_month),
+                      hintText: "Choose Date"
+                    ),
+                    onTap: () async {
+                      DateTime? selectedDate = await showDatePicker(
+                        context: context, 
+                        initialDate: pickedDate ?? DateTime.now(), 
+                        firstDate: DateTime.now(), 
+                        currentDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (context, widget){
+                          ThemeData theme = Theme.of(context).brightness == Brightness.dark ? ThemeData.dark() : ThemeData.light();
+                          return Theme(
+                            data: theme.copyWith(
+                              colorScheme: ColorScheme.light(
+                                primary: Colors.blue,
+                                surface: Theme.of(context).scaffoldBackgroundColor,
+                                onSurface: Theme.of(context).textTheme.bodyLarge!.color!,
+                              ),
+                              dividerTheme: DividerThemeData(
+                                color: Theme.of(context).colorScheme.secondary
+                              )
+                            ), 
+                            child: widget!
+                          );
+                        }
+                      );
+                      
+                      if(selectedDate == null) return;
+                      datePickerController.text = DateFormat("dd/MM/yyyy").format(selectedDate);
+                      setState(() {
+                        pickedDate = selectedDate;
+                        isLoading = true;
+                      });
+                      await Future.delayed(const Duration(seconds: 2), () {
+                        setState(() {
+                          isLoading = false;
+                        });
+                      });
+                    },
+                  ),
                 ),
-                child: const Text("BUY TICKET"),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          if(pickedDate != null)
+            isLoading 
+              ? Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: const CircularProgressIndicator(
+                  color: Colors.blue,
+                )
+              )
+              : Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: theaters.map((theater) {
+                  return Card(
+                    color: Theme.of(context).cardColor,
+                    elevation: 2,
+                    shape: const RoundedRectangleBorder(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) => TheaterDetailPage(theater: theater, showBuyList: false))
+                                    );
+                                  },
+                                  child: Text(
+                                    theater.name.toUpperCase(),
+                                    style: Theme.of(context).textTheme.headlineSmall,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'Rp ',
+                                  decimalDigits: 0,
+                                ).format(theater.price)
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                          child: Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            clipBehavior: Clip.hardEdge,
+                            children: theater.availableTime.asMap().entries.map((e) {
+                              bool isAvailable = DateTime.now().day != pickedDate!.day || DateTime.now().day == pickedDate!.day && DateTime.now().hour * 60 + DateTime.now().minute < e.value.hour * 60 + e.value.minute;
+                              return InkWell(
+                                onTap: isAvailable ? () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => SelectSeatPage(
+                                      movie: widget.movie, 
+                                      theater: theater,
+                                      selectedDate: pickedDate!,
+                                      indexSelectedTime: e.key,
+                                      availableTime: theater.availableTime,
+                                    ))
+                                  );
+                                } : null,
+                                child: Container(
+                                  width: (MediaQuery.of(context).size.width - 70) / 4 ,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: isAvailable 
+                                    ? BoxDecoration(
+                                      border: Border.fromBorderSide(
+                                        BorderSide(
+                                          color: Theme.of(context).colorScheme.primary
+                                        )
+                                      ),
+                                      borderRadius: BorderRadius.circular(8)
+                                    )
+                                    : BoxDecoration(
+                                      color: Theme.of(context).colorScheme.secondary,
+                                      borderRadius: BorderRadius.circular(8)
+                                    ),
+                                  child: Text(
+                                    "${e.value.hour.toString().padLeft(2, '0')}:${e.value.minute.toString().padLeft(2, '0')}",
+                                    textAlign: TextAlign.center,
+                                    style: isAvailable ? Theme.of(context).textTheme.bodySmall : Theme.of(context).textTheme.bodySmall!.apply(color: Colors.white),
+                                  ),
+                                )
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
               ),
             ),
           )

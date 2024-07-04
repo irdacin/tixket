@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tixket/models/movie_model.dart';
-import 'package:tixket/pages/home/movie_detail_page.dart';
+import 'package:tixket/pages/movie/movie_detail_page.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -42,7 +42,7 @@ class MovieCard extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -68,7 +68,7 @@ class MovieCard extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(height: 15)
+                      const SizedBox(height: 10)
                     ],
                   ),
                 ),

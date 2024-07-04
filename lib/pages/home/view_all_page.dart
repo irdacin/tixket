@@ -22,13 +22,13 @@ class ViewAllPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         width: MediaQuery.of(context).size.width,
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 20,
-            childAspectRatio: (MediaQuery.of(context).size.width / 2 - 20) / 370
+            childAspectRatio: (MediaQuery.of(context).size.width / 2 - 20) / 400
           ),
           itemCount: movies.length,
           itemBuilder: (context, index) => MovieCard(movie: movies[index]),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tixket/models/ticket_model.dart';
-import 'package:tixket/pages/home/ticket_page.dart';
+import 'package:tixket/pages/movie/ticket_page.dart';
 import 'package:tixket/pages/index_page.dart';
 import 'package:tixket/providers/booking_history_provider.dart';
 
