@@ -40,8 +40,8 @@ class AccountPage extends StatelessWidget {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                    border: Border.fromBorderSide(
-                                      BorderSide(color: Theme.of(context).colorScheme.primary)
+                                    border: const Border.fromBorderSide(
+                                      BorderSide(color: Colors.blue)
                                     ),
                                     borderRadius: BorderRadius.circular(50)
                                   ),
@@ -55,11 +55,14 @@ class AccountPage extends StatelessWidget {
                                       Provider.of<UserProvider>(context, listen: false).updateImage(newImage);
                                       Navigator.of(context).pop();
                                     },
-                                    icon: const Icon(Icons.camera_alt)
+                                    icon: const Icon(Icons.camera_alt, color: Colors.blue)
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                const Text("Take Picture")
+                                Text(
+                                  "Take Picture",
+                                  style: Theme.of(context).textTheme.displayMedium,
+                                )
                               ],
                             ),
                             Column(
@@ -67,8 +70,8 @@ class AccountPage extends StatelessWidget {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                    border: Border.fromBorderSide(
-                                      BorderSide(color: Theme.of(context).colorScheme.primary)
+                                    border: const Border.fromBorderSide(
+                                      BorderSide(color: Colors.blue)
                                     ),
                                     borderRadius: BorderRadius.circular(50)
                                   ),
@@ -83,11 +86,14 @@ class AccountPage extends StatelessWidget {
                                       // UpdateUserDetail().updateImage(Provider.of<UserProvider>(context).currentUser!.username, newImage);
                                       Navigator.of(context).pop();
                                     },
-                                    icon: const Icon(Icons.image),
+                                    icon: const Icon(Icons.image, color: Colors.blue),
                                   )
                                 ),
                                 const SizedBox(height: 10),
-                                const Text("From Gallery")
+                                Text(
+                                  "From Gallery",
+                                  style: Theme.of(context).textTheme.displayMedium,
+                                )
                               ],
                             ),
                           ]
