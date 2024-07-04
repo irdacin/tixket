@@ -23,17 +23,20 @@ class HomePage extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const SearchPage())
-              );
-            }, 
-            tooltip: "Search",
-            icon: const Icon(
-              Icons.search,
-              size: 28,
-            )
+          Hero(
+            tag: "searchField",
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const SearchPage())
+                );
+              }, 
+              tooltip: "Search",
+              icon: const Icon(
+                Icons.search,
+                size: 28,
+              )
+            ),
           ),
           PopupMenuButton(
             icon: const Icon(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tixket/data/movie_data.dart';
+import 'package:tixket/models/movie_model.dart';
+import 'package:tixket/pages/movie/movie_detail_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -8,84 +11,66 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  Icon customIcon = const Icon(Icons.search);
-  Widget customSearchBar = const Text('Search Film');
+  TextEditingController searchController = TextEditingController();
+  List<Movie> filteredMovies = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: customSearchBar,
-        // automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                if (customIcon.icon == Icons.search) {
-                  customIcon = const Icon(Icons.cancel);
-                  customSearchBar = const ListTile(
-                    leading: Icon(
-                      Icons.search,
-                      size: 28,
-                    ),
-                    title: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'type in film name...',
-                        hintStyle: TextStyle(
-                          color: Color(0xff858484),
-                          fontSize: 18,
-                          fontStyle: FontStyle.italic,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                      // style: TextStyle(
-                      //   color: Colors.black,
-                      // ),
-                    ),
-                  );
-                }
-              });
-            },
-            icon: customIcon,
-          )
-        ],
-        centerTitle: true,
+        title: Hero(
+          tag: "searchField",
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).colorScheme.onPrimaryFixed,
+              ),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    filteredMovies = value.isEmpty ? [] : movies
+                      .where((movie) => 
+                      movie.title.toLowerCase().contains(value.toLowerCase()))
+                      .toList();
+                  });
+                },
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  border: InputBorder.none,
+                  suffixIcon: searchController.text.isNotEmpty ? 
+                    IconButton(
+                      onPressed: () => setState(() {
+                        searchController.clear();
+                        filteredMovies.clear();
+                      }), 
+                      icon: const Icon(Icons.cancel_outlined)
+                    ) : null,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),  
+                ),
+                autofocus: true,
+              ),
+            ),
+          ),
+        ),
       ),
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                "Result: ",
-                style: TextStyle(fontSize: 15),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Popular in Tixket: "),
-              SizedBox(
-                height: 15,
-              ),
-              InputChip(
-                label: Text("Avengers: Endgame"),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              InputChip(label: Text("Starwars: The rise of skywalker")),
-              SizedBox(
-                height: 10,
-              ),
-              InputChip(label: Text("Godzilla: King of the Monster")),
-            ],  
-          )
-        ],
+      body: ListView.builder(
+        itemCount: filteredMovies.length,
+        itemBuilder: (context, index) {
+          Movie movie = filteredMovies[index];
+          return ListTile(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie))
+              );
+            },
+            leading: const Icon(Icons.search),
+            title: Text(movie.title),
+            trailing: const Icon(Icons.keyboard_arrow_right_sharp),
+          );
+        },
       ),
     );
   }
