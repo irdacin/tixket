@@ -30,13 +30,13 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Theater's Detail"),
+        title: const Text("Theater's Detail"),
       ),
       body: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -46,12 +46,12 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
                 ),
                 Text(widget.theater.location),
                 Text(widget.theater.address),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text("Phone: ${widget.theater.phone}"),
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Visibility(
             visible: widget.showBuyList,
             child: Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary)
@@ -147,19 +147,19 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
                 return Card(
                   elevation: 5,
                   color: Theme.of(context).cardColor,
-                  margin: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(15),
                   clipBehavior: Clip.hardEdge,
-                  child: Container(
-                    margin: const EdgeInsets.all(15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie, showBuyButton: false))
-                            );
-                          },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => MovieDetailPage(movie: movie, showBuyButton: false))
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -225,10 +225,11 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10),
-                        Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),                        
-                        SizedBox(height: 10),
-                        Wrap(
+                      ),
+                      Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),                        
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Wrap(
                           spacing: 10,
                           runSpacing: 10,
                           clipBehavior: Clip.hardEdge,
@@ -247,7 +248,7 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
                                 );
                               } : null,
                               child: Container(
-                                width: (MediaQuery.of(context).size.width - 70) / 4 ,
+                                width: (MediaQuery.of(context).size.width - 90) / 4 ,
                                 padding: const EdgeInsets.all(10),
                                 decoration: isAvailable 
                                   ? BoxDecoration(
@@ -271,8 +272,8 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
                             );
                           }).toList(),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               },

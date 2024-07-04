@@ -14,7 +14,7 @@ class TheaterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Theaters"),
+        title: const Text("Theaters"),
         actions: [
           PopupMenuButton(
             icon: const Icon(
@@ -81,12 +81,12 @@ class TheaterPage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 10)
+          const SizedBox(width: 10)
         ],
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: ListView.separated(
           separatorBuilder: (context, index) => Divider(thickness: 0.0, color: Theme.of(context).colorScheme.secondary),
           itemCount: theaters.length,
@@ -101,7 +101,7 @@ class TheaterPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10)
               ),
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 backgroundColor: Colors.blue,
                 child: Icon(FontAwesomeIcons.t)
               ),
