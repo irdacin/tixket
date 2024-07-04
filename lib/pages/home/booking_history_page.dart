@@ -19,7 +19,7 @@ class BookingHistoryPage extends StatelessWidget {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: bookingHistoryMovie.isEmpty ? Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

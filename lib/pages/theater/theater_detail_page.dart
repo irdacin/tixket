@@ -177,7 +177,7 @@ class _TheaterDetailPageState extends State<TheaterDetailPage> {
                               Expanded(
                                 child: Container(
                                   height: 150,
-                                  padding: const EdgeInsets.only(top: 10, left: 10),
+                                  padding: const EdgeInsets.only(top: 5, left: 10),
                                   child: Stack(
                                     children: [
                                       Column(

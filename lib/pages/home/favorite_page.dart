@@ -18,7 +18,7 @@ class FavoritePage extends StatelessWidget {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: favoriteMovie.isEmpty ? Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +64,7 @@ class FavoritePage extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    margin: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -82,7 +82,7 @@ class FavoritePage extends StatelessWidget {
                         Expanded(
                           child: Container(
                             height: 150,
-                            padding: const EdgeInsets.only(top: 10, left: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10),
                             child: Stack(
                               children: [
                                 Column(
