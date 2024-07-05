@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tixket/pages/auth/login_page.dart';
+import 'package:tixket/pages/onboarding/onboarding_page.dart';
 import 'package:tixket/providers/booking_history_provider.dart';
 import 'package:tixket/providers/favorite_movie_provider.dart';
 import 'package:tixket/providers/notification_provider.dart';
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           theme: LightTheme().theme,
           darkTheme: DarkTheme().theme,
           themeMode: Provider.of<ThemeProvider>(context).themeMode,
-          home: const LoginPage()
+          home: const OnboardingPage()
         );
       }
     );

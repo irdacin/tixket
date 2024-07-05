@@ -28,7 +28,7 @@ class ViewAllPage extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 20,
-            childAspectRatio: (MediaQuery.of(context).size.width / 2 - 20) / 400
+            childAspectRatio: (MediaQuery.of(context).size.width / 2 - 20) / 380
           ),
           itemCount: movies.length,
           itemBuilder: (context, index) => MovieCard(movie: movies[index]),
