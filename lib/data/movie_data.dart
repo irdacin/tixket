@@ -93,6 +93,7 @@ List<Movie> movies = [
     writer: "Joko Anwar",
     cast: "Faradina Mufti, Reza Rahadian, Widuri Puteri, Muzakki Ramdhan, Fachri Albar, Happy Salma, Slamet Rahardjo, Christine Hakim, Arswendy Bening Swara, Niniek L. Karim, Jajang C. Noer",
     distributor: "Come And See Pictures",
+    star: 3.5,
     type: "Playing Now",
   ),
   Movie(
@@ -104,6 +105,7 @@ List<Movie> movies = [
     writer: "Terry Rossio, Simon Barrett, Jeremy Slater",
     cast: "Rebecca Hall, Dan Stevens, Kaylee Hottle, Fala Chen, Rachel House, Brian Tyree Henry, Alex Ferns, Mercy Cornwall, Nicola Crisa, Jordy Campbell",
     distributor: "Warner Bros. Pictures",
+    star: 3.5,
     type: "Playing Now",
   ),
   Movie(
@@ -115,6 +117,7 @@ List<Movie> movies = [
     writer: "Gina S Noer",
     cast: "Angga Yunanda, Aisha Nurra Datau, Farrell Rafisqy, Cut Mini, Arswendi Bening Swara, Lulu Tobing, Keanu Angelo, Maisha Kanna, Rachel Amanda, Shakira Jasmine, Putri Ayudya",
     distributor: "Starvision, Wahana Kreator",
+    star: 3,
     type: "Playing Now",
   ),
   Movie(
@@ -124,6 +127,7 @@ List<Movie> movies = [
     producer: "Ridley Scott",
     director: "Drake Doremus",
     writer: "Ben York Jonek",
+    star: 2.5,
     type: "Playing Now",
   ),
   Movie(
@@ -133,6 +137,7 @@ List<Movie> movies = [
     producer: "Chris Hatcher Scott James Wallace",
     director: "Stacy Rukeyser",
     writer: "With Sarah Shahi",
+    star: 3,
     type: "Playing Now",
   ),
   Movie(
@@ -155,6 +160,7 @@ List<Movie> movies = [
     writer: "Choe Seung",
     cast: "Ji Il Joo, Park Ji Yeon, Jo Kyung Hoon, Choi Sung Min, Jung Yi Joo, Tak Teu In",
     distributor: "Lee Film, Joy N Cinema",
+    star: 4,
     type: "Coming Soon",
   ),
   Movie(
@@ -166,6 +172,7 @@ List<Movie> movies = [
     writer: "John Krasinski",
     cast: "Ryan Reynolds, John Krasinski, Cailey Fleming, Steve Carell, Phoebe Waller-bridge, Louis Gossett Jr., Emily Blunt, Matt Damon, Sam Rockwell, Maya Rudolph, Jon Stewart",
     distributor: "Paramount Pictures",
+    star: 4.5,
     type: "Coming Soon",
   ),
   Movie(
@@ -177,6 +184,7 @@ List<Movie> movies = [
     writer: "Dipo Oseni, Doug Richardson",
     cast: "John Travolta, Kristin Davis, Lukas Haas, Quavo, Victorya Brandart, Oel Cohen, Matt Gerald, Jake Ellenz, Luis Da Silva Jr.",
     distributor: "Convergence Entertainment Group",
+    star: 3,
     type: "Coming Soon",
   ),
   Movie(
@@ -188,6 +196,7 @@ List<Movie> movies = [
     writer: "Lele Laila",
     cast: "Darius Sinathrya, Carissa Perusset, Sara Fajira, Arswendy Beningswara, Nugie",
     distributor: "Falcon Black",
+    star: 5,
     type: "Coming Soon",
   ),
   Movie(
@@ -199,6 +208,7 @@ List<Movie> movies = [
     writer: "Paramount",
     cast: "Darius Sinathrya, Carissa Perusset, Sara Fajira, Arswendy Beningswara, Nugie",
     distributor: "Falcon Black",
+    star: 3,
     type: "Coming Soon",
   ),
   Movie(
@@ -209,6 +219,7 @@ List<Movie> movies = [
     director: "Mohd Nizam Abd Razak",
     writer: "Les' Copaque Productions Sdn. Bhd.",
     cast: "Nur Fathiah Diaz, Irfan Fahim, Asyiela Putri Azhar, Puteri Balqis Azizi, Muhammad Sabri Yunus, Awie",
+    star: 5,
     type: "Coming Soon",
   ),
 ];

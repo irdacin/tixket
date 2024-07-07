@@ -270,7 +270,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                 backgroundColor: selectedSeats.isEmpty ? Theme.of(context).colorScheme.secondary : Colors.blue,
                 textStyle: Theme.of(context).textTheme.headlineMedium,
                 padding: const EdgeInsets.all(20),
-                minimumSize: const Size(200, 0),
+                minimumSize: Size(MediaQuery.of(context).size.width / 2 - 20, 0),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
