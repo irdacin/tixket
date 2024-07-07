@@ -114,7 +114,6 @@ class BookingHistoryPage extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: Colors.blue,
-                              // minimumSize: const Size(double.infinity, 50),
                               textStyle: Theme.of(context).textTheme.bodyMedium,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)

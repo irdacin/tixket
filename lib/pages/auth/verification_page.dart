@@ -85,7 +85,7 @@ class _VerificationPageState extends State<VerificationPage>  {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

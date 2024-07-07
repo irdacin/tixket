@@ -91,7 +91,7 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                     if(formKey.currentState!.validate()) {
                       int index = -1;
                       for(int i = 0; i < users.length; i++) {
-                        if(users[i].username == widget.email) {
+                        if(users[i].email == widget.email) {
                           index = i;
                         }
                       }
@@ -112,11 +112,12 @@ class _CreateNewPasswordPageState extends State<CreateNewPasswordPage> {
                                 children: [
                                   Text(
                                     "Succesful",
-                                    style: Theme.of(context).textTheme.headlineMedium,
+                                    style: Theme.of(context).textTheme.headlineLarge,
+                                    textAlign: TextAlign.center,
                                   ),
                                   const SizedBox(height: 20),
                                   Text(
-                                    "Congratulations! Your password has been changed. Click continue to login",
+                                    "Congratulations!\nYour password has been changed. Click continue to login",
                                     style: Theme.of(context).textTheme.bodyMedium,
                                   ),
                                   const SizedBox(height: 30),
