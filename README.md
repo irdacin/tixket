@@ -18,7 +18,7 @@ Tixket is a user-friendly and intuitive cinema ticket booking application design
    flutter run
 
 ## Screenshots
-<img src="https://github.com/drinic/tixket/assets/165979353/bda5c9bb-cebf-4574-abb1-fba1c0306596" alt="Screenshot_1720362391" width="200"/>
-<img src="https://github.com/drinic/tixket/assets/165979353/9d50aaa2-b64f-4125-9ad0-39033fa85435" alt="Screenshot_1720362004" width="200"/>
-<img src="https://github.com/drinic/tixket/assets/165979353/b011ac30-7588-42fe-811c-c1bde5fe4534" alt="Screenshot_1720362045" width="200"/>
-<img src="https://github.com/drinic/tixket/assets/165979353/f513b15e-4c52-480a-9997-20d1d0ba1fad" alt="Screenshot_1720362072" width="200"/>
+<img src="https://github.com/mes1504/Mantacore-IFBSore/assets/165979353/37f89cb3-6559-4b21-80ea-3d48a0094f31" alt="Screenshot_1720362004" width="200"/>
+<img src="https://github.com/mes1504/Mantacore-IFBSore/assets/165979353/776cf4b3-a2b7-4651-ab3d-5317f5639bed" alt="Screenshot_1720362045" width="200"/>
+<img src="https://github.com/mes1504/Mantacore-IFBSore/assets/165979353/3b2e5d37-1baf-4fec-849f-15eeb04cb67e" alt="Screenshot_1720362072" width="200"/>
+<img src="https://github.com/mes1504/Mantacore-IFBSore/assets/165979353/d76a1946-b18c-4c1b-81a2-a44c729322a4" alt="Screenshot_1720362072" width="200"/>
