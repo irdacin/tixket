@@ -52,12 +52,13 @@ class MovieCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.headlineSmall
                         ),
                       ),
-                      Row(
+                      Wrap(
                         children: [
                           for(int i=0; i<5; i++) 
                             Icon(
                               i < movie.star.toInt() ? Icons.star : i.toDouble() < movie.star ? Icons.star_half : Icons.star_border,
                               color: const Color(0xfff7d300),
+                              size: 18,
                             ),
                           const SizedBox(width: 5),
                           Text(
@@ -68,7 +69,6 @@ class MovieCard extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(height: 10)
                     ],
                   ),
                 ),

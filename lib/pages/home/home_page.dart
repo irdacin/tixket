@@ -138,7 +138,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 400,
+              height: 380,
               child: ListView.builder(
                 itemCount: playingNowMovies.length,
                 scrollDirection: Axis.horizontal,
@@ -179,9 +179,8 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              height: 400,
+            SizedBox(
+              height: 380,
               child: ListView.builder(
                 itemCount: comingSoonMovies.length,
                 scrollDirection: Axis.horizontal,
@@ -193,6 +192,7 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
+            const SizedBox(height: 12)
           ],
         ),
       ),
