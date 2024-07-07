@@ -1,19 +1,21 @@
 # tixket
 
-A new Flutter project.
+Tixket is a user-friendly and intuitive cinema ticket booking application designed to make your movie-going experience seamless and enjoyable. With Tixket, you can browse movies, check showtimes, book tickets, and manage your reservations all in one place.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository
+   ```sh
+   https://github.com/drinic/tixket
+2. Navigate to the project directory:
+   ```sh
+   cd tixket
+3. Install the dependencies:
+   ```sh
+   flutter pub get
+4. Run the app:
+   ```sh
+   flutter run
 
 ## Screenshots
 <img src="https://github.com/drinic/tixket/assets/165979353/bda5c9bb-cebf-4574-abb1-fba1c0306596" alt="Screenshot_1720362391" width="200"/>
