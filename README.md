@@ -6,7 +6,7 @@ Tixket is a user-friendly and intuitive cinema ticket booking application design
 
 1. Clone the repository
    ```sh
-   https://github.com/drinic/tixket
+   git clone https://github.com/drinic/tixket
 2. Navigate to the project directory:
    ```sh
    cd tixket
