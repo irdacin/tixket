@@ -69,6 +69,7 @@ List<Movie> movies = [
     writer: "Jonathan Aibel, Glenn Berger",
     cast: "Jack Black, Awkwafina, Viola Davis, Dustin Hoffman, James Hong, Bryan Cranston, Ian Mcshane, Ke Huy Quan",
     distributor: "Universal Pictures",
+    star: 3,
     type: "Playing Now",
   ),
   Movie(
@@ -80,6 +81,7 @@ List<Movie> movies = [
     writer: "Josh Friedman",
     cast: "Freya Allan, Kevin Durand, Dichen Lachman, William H. Macy, Owen Teague, Lydia Peckham, Peter Macon, Sara Wiseman, Neil Sandilands, Eka Darville",
     distributor: "20th Century Studios",
+    star: 4,
     type: "Playing Now",
   ),
   Movie(
